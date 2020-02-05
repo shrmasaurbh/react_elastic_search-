@@ -291,11 +291,13 @@ class HomeBody extends Component {
 								            <div className="project_detail">
 								            	<ul className="list-unstyled">
 								            		<li>
-								            			<Link className="textEllipsis procDescTitle t-capital" to={"/product/"+(feature.id)}>{feature.title}</Link>
+								            			<Link to={"/product/"+(feature.id)}>
+															<h3 className="p-1 textEllipsis procDescTitle t-capital">{feature.title}</h3>
+														</Link>
 							            			</li>
 								            		<li className="p-1 t-capital">{feature.project_name}</li>
 								            		<li className="p-1 text-info">1BHK, 2BHK, 3BHK</li>
-								            		<li>{feature.price}</li>
+								            		<li className="p-1">{feature.price}</li>
 								            	</ul>
 								            </div>
 								        </div>    

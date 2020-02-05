@@ -149,7 +149,7 @@ class Filter extends Component {
         				</span>
 			          	<span className="filter_title">Filter</span>
 			          	<span className="apply_filter" onClick = {this.applyFilter}>Apply</span>
-			          	<span className="apply_filter mr-2" onClick = {this.clearFilter}>clear</span>
+			          	<span className="apply_filter mr-2" onClick = {this.clearFilter}>Clear</span>
 			        </div>
 			          	<hr/>
 				        <div className="bhk-count col-12">

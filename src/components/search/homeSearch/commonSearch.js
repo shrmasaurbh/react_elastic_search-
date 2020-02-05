@@ -37,8 +37,8 @@ class CommonSearch extends Component {
 
 		    }else{
 		    	this.setState({
-		    		searchList: false,
-		    		searchInput : []
+		    		searchList: true,
+		    		searchInput : [{"id":1,"project_name":"No result Found!!!"}]
 		    	});
 		    }
 	    }
@@ -96,7 +96,7 @@ class CommonSearch extends Component {
 		        cursor: prevState.cursor + 1
 		      }))
 		    }
-		    
+
 	      this.setState({
 	    		cursor : cursor+1	
 	    	})
@@ -143,10 +143,10 @@ class CommonSearch extends Component {
 		        var resData = {};
 		        resData = await getListData(listData);
 		        console.log("========================================");
-		        // console.log(resData);
+		        // console.log(resData,"resData on enter serach");
 		     
 		        resData.procName = procName;
-	        	if(resData.meta.count > 0){
+	        	if(resData.meta.count >= 0){
 	        		
 			        this.props.handleSearch(resData); 
 
@@ -182,7 +182,7 @@ class CommonSearch extends Component {
 		        // console.log(resData);
 		     
 		        resData.procName = procName;
-	        	if(resData.meta.count > 0){
+	        	if(resData.meta.count >= 0){
 	        		
 			        this.props.handleSearch(resData); 
 
@@ -200,7 +200,7 @@ class CommonSearch extends Component {
 
 			const prevSearchVal = this.props.inputProcVal;
 			const { cursor,inputSearch,autoInputValue,searchInput } = this.state
-			console.log("00000000000000000000000", cursor);
+			// console.log("00000000000000000000000", cursor);
 		return(
 				<div className="input-group searchWrap p-0">
 					<input className="form-control prop_name" type="text" 

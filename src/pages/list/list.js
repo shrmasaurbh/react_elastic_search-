@@ -37,7 +37,7 @@ class List extends Component {
         console.log("========================================");
         console.log(resData);
         setTimeout(()=>{
-        	if(resData.meta.count > 0){
+        	if(resData.meta.count >= 0){
         		
        			this.setState({listDetail : resData}) ;
 		        this.setState({showLoader : false})
@@ -50,7 +50,7 @@ class List extends Component {
 		this.setState({showLoader : true})
 		console.log(data,"1111111111110000000000000000000000");
 		setTimeout(()=>{
-        	if(data.meta.count > 0){
+        	if(data.meta.count >= 0){
         		
         		this.props.history.push('/list?q='+data.procName);
        			this.setState({listTitle : data.procName}) ;
