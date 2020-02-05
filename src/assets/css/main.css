@@ -54,7 +54,7 @@
 	background-repeat: no-repeat;
     background-position:top;
     background-attachment: fixed;
-    background-size: auto;
+    background-size: cover;
     width: 100%;
     padding: 5em 0 8em;
     margin-bottom: 18px;
@@ -111,7 +111,7 @@
     display: inline-block;
     width: calc(100% - 222px);
     margin-left: 10px;
-    margin-top: 0;
+    margin-top: 20px;
     position: fixed;
 }
 .procSuggestion_desc p{
@@ -153,6 +153,7 @@
 }
 .featuredSection{
 	margin: 32px 0;
+	padding: 0px 10px;
 }
 .launch_block{
 	padding: 0px!important;
@@ -406,6 +407,8 @@
 .homeHeader{
 	width: 100%;
     display: flex;
+    padding-top: 2em;
+    margin-bottom: 2em;
 }
 .filter_media{
 	display: none;
@@ -424,8 +427,8 @@
 .apply_filter{
     float: right;
     background-color: #56A366 !important;
-    border-radius: 6px;
-    padding: 2px 4px;
+    /*border-radius: 6px;*/
+    padding: 4px 8px;
     right: 8px;
     color: #fff;
     position: relative;
@@ -469,6 +472,9 @@
 }
 .filter_bhk{
 	cursor: pointer;
+}
+.project_detail{
+	padding: 0px 10px;
 }
 
 /* ===================================================================================================*/
@@ -578,7 +584,7 @@
 	    display: inline-block;
 	    width: calc(100% - 150px);
 	    margin-left: 10px;
-	    margin-top: 0;
+	    margin-top: 20px;
 	    position: fixed;
 	}
 	.homepage-caption-header, .aboutSpecial_desc h4{

@@ -63,21 +63,21 @@ class ListingBody extends Component {
 		        this.setState({showLoader : false})
         		window.scrollTo(0, 0);
         	}
-        },2000)
+        },1000)
 	}
 
 	handleChangePage= async (pageNumber)=>{
 		console.log(`active page is ${pageNumber}`);
 		console.log("this.state.filters pagination", this.state.filters);
         this.setState({showLoader : true})
-        this.setState({showLoader : true})
     	this.setState({activePage: pageNumber});
     	const procName = this.props.inputValue
     	var listData = {};
+    	listData.filters = [];
         listData.query = procName;
         listData.size = 4;
         listData.pageId = pageNumber;
-        listData.filters = this.state.filters || [];
+        listData.filters = [this.state.filters] || [];
         
         this.genericGetListData(listData);
 

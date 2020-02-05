@@ -43,7 +43,7 @@ class List extends Component {
 		        this.setState({showLoader : false})
         		window.scrollTo(0, 0);
         	}
-        },2000)
+        },1000)
     }
 
     handleSearchData = (data) =>{
@@ -58,7 +58,7 @@ class List extends Component {
 		        this.setState({showLoader : false})
         		window.scrollTo(0, 0);
         	}
-        },2000)
+        },1000)
 	}
 
 

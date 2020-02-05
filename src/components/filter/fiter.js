@@ -97,6 +97,7 @@ class Filter extends Component {
      //    filterData = {"bed_config" :this.state.bhk,"price":[{"from":this.state.from,"to":this.state.to}]};
     		
     	// }
+    	this.props.changeFilter();
         console.log("=== state of the filter ====",filterData);
         this.props.filterData(filterData);  
 
@@ -108,6 +109,7 @@ class Filter extends Component {
 	    this.setState({active : null})
 	    this.option0.value =0;
 	    this.option1.value =0;
+    	this.props.changeFilter();
         this.props.filterData(filterData);
 
         // console.log(this.state.active,"+++++++++++++++++++++");
@@ -204,26 +206,43 @@ class Filter extends Component {
             				<FontAwesomeIcon icon={faTimesCircle} className="text-success" />
         				</span>
 			          	<span className="filter_title">Filter</span>
-			          	<span className="apply_filter">Apply</span>
+			          	<span className="apply_filter" onClick = {this.applyFilter}>Apply</span>
+			          	<span className="apply_filter mr-2" onClick = {this.clearFilter}>Clear</span>
 			          	<hr/>
 				        <div className="bhk-count col-12">
 			          		<span>BHK</span>
 				            <ul className="list-unstyled row filter_ul text-center">
-				              <li className="card filter_bhk p-2 m-2 col-sm-3 col-3">1BHK</li>
-				              <li className="card filter_bhk p-2 m-2 col-sm-3 col-3">2BHK</li>
-				              <li className="card filter_bhk p-2 m-2 col-sm-3 col-3">3BHK</li>
-				              <li className="card filter_bhk p-2 m-2 col-sm-3 col-3">4BHK</li>
+				              <li className="card filter_bhk p-2 m-2 col-sm-3 col-3" 
+				              	style={{background: this.myColor(0)}} onClick={(e) => {this.toggle(0);this.handleLangChange(e);}}	
+				              	  value="1" ref={(ref) => this.li = ref}
+			              		>1BHK</li>
+				              <li className="card filter_bhk p-2 m-2 col-sm-3 col-3"
+				              	style={{background: this.myColor(1)}} onClick={(e) => {this.toggle(1);this.handleLangChange(e);}}
+				              	 value="2" ref={(ref) => this.li = ref} 
+				              >2BHK</li>
+				              <li className="card filter_bhk p-2 m-2 col-sm-3 col-3"
+				               	style={{background: this.myColor(2)}} onClick={(e) => {this.toggle(2);this.handleLangChange(e);}} 
+				               	value="3" ref={(ref) => this.li = ref}
+				               >3BHK</li>
+				              <li className="card filter_bhk p-2 m-2 col-sm-3 col-3" 
+				              	style={{background: this.myColor(3)}} onClick={(e) => {this.toggle(3);this.handleLangChange(e);}} 
+				              	value="4" ref={(ref) => this.li = ref}
+				              >4BHK</li>
 				            </ul>
 				        </div>
 				        <hr/><div className="mb-2 pl-3">Price Range</div>
 				        <div className="Price-range mb-2">
-				          <select defaultValue={'DEFAULT'} className="custom-select col-sm-5 ml-2 col-5">
+				          <select defaultValue={'DEFAULT'} className="custom-select col-sm-5 ml-2 col-5" 
+				          	onChange={this.handleLangChange} ref={(ref) => this.option0 = ref}
+				          >
 				            <option  value="DEFAULT">Min</option>
 				            <option value="1">One</option>
 				            <option value="2">Two</option>
 				            <option value="3">Three</option>
 				          </select>
-				          <select defaultValue={'DEFAULT'} className="custom-select col-sm-5 ml-2 col-5">
+				          <select defaultValue={'DEFAULT'} className="custom-select col-sm-5 ml-2 col-5" 
+				          	onChange={this.handleLangChange} ref={(ref) => this.option1 = ref}
+				          >
 				            <option  value="DEFAULT" >Max</option>
 				            <option value="1">One</option>
 				            <option value="2">Two</option>

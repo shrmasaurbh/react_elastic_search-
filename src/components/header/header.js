@@ -95,7 +95,7 @@ class Header extends Component {
 					        </div>
 					      </div>
 				        <div className={"input-group col-md-6 p-0 mt-3"+" "+(this.state.mobileSearch ? 'show' : 'hide')}>
-				          <CommonSearch />
+				          <CommonSearch  inputProcVal= {inputProcVal} handleSearch= {this.props.handleSearch}/>
 				        </div>
 					      <div className={"bg-success three_header" +" "+(this.state.sideBar ? 'three_header_mobile' : '')}>
 					      	<div className="col-lg-2 p-2 col-12 text-white media_sidebar">Popular Project</div>

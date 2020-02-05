@@ -14,7 +14,7 @@ import building1 from "../../assets/images/building1.jpeg";
 import building2 from "../../assets/images/building2.jpeg";
 import building3 from "../../assets/images/building3.jpeg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {faBuilding, faMapMarkedAlt, faUserTimes, faListOl, faHome} from "@fortawesome/free-solid-svg-icons";
+import {faBuilding, faMapMarkedAlt, faUserTimes, faListOl, faHome, faPhoneAlt} from "@fortawesome/free-solid-svg-icons";
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 
@@ -115,14 +115,17 @@ class HomeBody extends Component {
 				<section>
 					<Loading show={this.state.showLoader} />
 					<div className="container-fluid p-0 bgCommon">
-						<div className="homeHeader mb-5 pt-5">
+						<div className="homeHeader">
 					        <div className="col-lg-3 col-md-3 col-sm-3 col-6">
 					        	<Link to="/">
 					        		<img className="site_img" src={siteImage} alt="site-image" />
 					        	</Link>
 					        </div>
 					        <div className="ml-auto mr-3">
-					        	<span className="agent">Contact Advisior</span>
+					        	<span className="agent">
+	            					<FontAwesomeIcon icon={faPhoneAlt} className="text-white pr-1" />
+					        		Contact Advisior
+				        		</span>
 					        </div>
 					    </div>
 						<HomeSearch />
