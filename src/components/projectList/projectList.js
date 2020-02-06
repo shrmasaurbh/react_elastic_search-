@@ -140,7 +140,7 @@ class ListingBody extends Component {
 
 		// const listData = this.props.listValue;
 		let {count, size} = this.state.meta;
-		console.log("this.state.meta.count",this.state.meta.count);
+		// console.log("this.state.meta.count",this.state.meta.count);
 		return(
 				<div className="content-wrapper">
 					<Loading show={this.state.showLoader} />

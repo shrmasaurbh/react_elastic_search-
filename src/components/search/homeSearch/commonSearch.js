@@ -196,11 +196,49 @@ class CommonSearch extends Component {
   		}
   	}
 
+  	handleSuggestClick = async (e)=>{
+
+  		var suggestVal =  e.currentTarget.dataset.value;
+
+  			this.setState({searchList: false})
+  			this.setState({autoInputValue: suggestVal})
+  			const urlOrigin = window.location.origin;
+  			const urlHref = window.location.href;
+  			let urlVal = urlHref.substr(urlOrigin.length, 7);
+  			console.log(urlVal);
+  			// console.log(this.state.inputSearch);
+  			if(urlVal == "/#/list"){
+				const procName = suggestVal
+		    	var listData = {};
+		        listData.query = procName;
+		        listData.size = 4;
+		        listData.pageId = 1;
+		        listData.filters = [];
+
+		        var resData = {};
+		        resData = await getListData(listData);
+		        console.log("========================================");
+		        // console.log(resData);
+		     
+		        resData.procName = procName;
+	        	if(resData.meta.count >= 0){
+	        		
+			        this.props.handleSearch(resData); 
+
+	        	}
+  			}else{
+
+  				this.props.history.push('/list?q='+suggestVal);
+	    		// this.props.history.push('/list?q='+this.state.inputSearch);
+  			}
+  	}
+
 	render(){
 
 			const prevSearchVal = this.props.inputProcVal;
+
 			const { cursor,inputSearch,autoInputValue,searchInput } = this.state
-			// console.log("00000000000000000000000", cursor);
+			console.log("00000000000000000000000", prevSearchVal);
 		return(
 				<div className="input-group searchWrap p-0">
 					<input className="form-control prop_name" type="text" 
@@ -216,7 +254,7 @@ class CommonSearch extends Component {
 					<span>
 						<div id="searchsuggestion" ref={node => { this.node = node; }} className={"searchSuggestion popup"+" "+(this.state.searchList ? 'show' : 'hide')}>
 							<ul className="list-unstyled p-2 mb-0">
-					        	{searchInput.map((searchInput, i) => <li className={"textEllipsis suggestList text-capitalize t-capital" +" "+(cursor === i ? 'active' : null)} key={searchInput.id}>{searchInput.project_name}</li>)}
+					        	{searchInput.map((searchInput, i) => <li onClick={this.handleSuggestClick} data-value={searchInput.project_name} className={"textEllipsis suggestList text-capitalize t-capital" +" "+(cursor === i ? 'active' : null)} key={searchInput.id}>{searchInput.project_name}</li>)}
 					    	</ul>
 				      	</div>
 					</span>

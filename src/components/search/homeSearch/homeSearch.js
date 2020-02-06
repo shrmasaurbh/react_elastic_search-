@@ -125,6 +125,13 @@ class HomeSearch extends Component {
   		}
   	}
 
+  	handleSuggestClick= (e) =>{
+
+  		let suggestVal =  e.currentTarget.dataset.value;
+  		this.props.history.push('/list?q='+suggestVal);
+
+  	}
+
 	render(){
 			const { cursor,inputSearch,autoInputValue } = this.state
 		return(
@@ -145,7 +152,7 @@ class HomeSearch extends Component {
 						<span>
 							<div id="searchsuggestion" ref={node => { this.node = node; }} className={"searchSuggestion popup"+" "+(this.state.searchList ? 'show' : 'hide')}>
 								<ul className="list-unstyled p-2 mb-0">
-						        	{ this.state.searchInput.map((searchInput, i) => <li className={"textEllipsis suggestList text-capitalize t-capital" +" "+(cursor === i ? 'active' : null)} key={searchInput.id}>{searchInput.project_name}</li>)}
+						        	{ this.state.searchInput.map((searchInput, i) => <li onClick={this.handleSuggestClick} data-value={searchInput.project_name} className={"textEllipsis suggestList text-capitalize t-capital" +" "+(cursor === i ? 'active' : null)} key={searchInput.id}>{searchInput.project_name}</li>)}
 						    	</ul>
 					      	</div>
 						</span>

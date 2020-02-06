@@ -48,7 +48,7 @@ class List extends Component {
 
     handleSearchData = (data) =>{
 		this.setState({showLoader : true})
-		console.log(data,"1111111111110000000000000000000000");
+		console.log(data.procName,"1111111111110000000000000000000000");
 		setTimeout(()=>{
         	if(data.meta.count >= 0){
         		
@@ -63,7 +63,7 @@ class List extends Component {
 
 
 	render(){
-		// console.log(this.state.listDetail)
+		console.log(this.state.listTitle)
 		return( 
 			<div>
 				<Loading show={this.state.showLoader} />

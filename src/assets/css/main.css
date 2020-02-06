@@ -2,6 +2,11 @@
     background-color: #00182e;
 }
 
+.headerSize{
+	padding-top: 2em;
+    margin-bottom: 2em;
+}
+
 .main_header {
     width: inherit;
 }

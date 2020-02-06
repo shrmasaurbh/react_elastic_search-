@@ -35,7 +35,7 @@ class Header extends Component {
 	}
 
 	render(){
-		console.log("this.props.inputValue");
+		console.log("this.props.inputValue",this.props.inputValue);
 		const inputProcVal =  this.props.inputValue;
 
 		const isDesktop = this.state.screenWidth;
@@ -46,7 +46,7 @@ class Header extends Component {
 				{isDesktop > 991 ? 
 					  <nav className="navbar desktop">
 					    <div className="container-fluid p-0">
-						    <div className="three_header mb-5 mt-5">
+						    <div className="three_header headerSize">
 								<div className="col-lg-3 col-md-3">
 						    		<Link to="/">
 							        	<img className="site_img" src={siteImage} alt="site-image" />
