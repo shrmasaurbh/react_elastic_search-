@@ -9,7 +9,7 @@ class HomeSearch extends Component {
 		this.state = {
       		searchInput: [],
       		searchList : false,
-      		cursor:0,
+      		cursor:-1,
       		inputSearch : '',
       		autoInputValue : '',
       		popupVisible: false
@@ -87,15 +87,17 @@ class HomeSearch extends Component {
 	        // console.log(e.target.value)
 	      var selected = searchInput[cursor-1].project_name;
 	    } else if (e.keyCode === 40 && cursor < searchInput.length - 1) {
-	      if(cursor===0){
-		      this.setState( prevState => ({
-		        cursor: prevState.cursor + 1
-		      }))
+	      if(cursor===-1){
+    		console.log(this.state.cursor,"this.state.cursor atb  home page");  
+		      this.setState({
+		        cursor: cursor + 1
+		      })
 		    }
 	      this.setState({
 	    		cursor : cursor+1	
 	    	})
-	    this.setState({inputSearch: searchInput[cursor].project_name})
+
+	    // this.setState({inputSearch: searchInput[cursor].project_name})
 	      var selected = searchInput[cursor+1].project_name;
 	    }
 	    this.setState({autoInputValue : selected})
@@ -108,6 +110,7 @@ class HomeSearch extends Component {
 	  		}
 	    }
   	}
+
   	handleSearch = (e) =>{
   		if (this.state.autoInputValue != ''){
 

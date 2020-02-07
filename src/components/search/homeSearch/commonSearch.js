@@ -10,7 +10,7 @@ class CommonSearch extends Component {
 		this.state = {
       		searchInput: [],
       		searchList : false,
-      		cursor:0,
+      		cursor:-1,
       		inputSearch : '',
       		autoInputValue : this.props.inputProcVal,
       		popupVisible: false
@@ -91,16 +91,16 @@ class CommonSearch extends Component {
 	        // console.log(e.target.value)
 	      var selected = searchInput[cursor-1].project_name;
 	    } else if (e.keyCode === 40 && cursor < searchInput.length - 1) {
-	      if(cursor===0){
-		      this.setState( prevState => ({
-		        cursor: prevState.cursor + 1
-		      }))
+	      if(cursor===-1){
+		      this.setState({
+		        cursor: cursor + 1
+		      })
 		    }
 
 	      this.setState({
 	    		cursor : cursor+1	
 	    	})
-	    this.setState({inputSearch: searchInput[cursor].project_name})
+	    // this.setState({inputSearch: searchInput[cursor].project_name})
 	      var selected = searchInput[cursor+1].project_name;
 	      // console.log("xoooooooooooooooxoooxoooxoox", selected);
 	    // console.log("selaected",selected);
@@ -167,7 +167,7 @@ class CommonSearch extends Component {
   			const urlHref = window.location.href;
   			let urlVal = urlHref.substr(urlOrigin.length, 7);
   			console.log(urlVal);
-  			console.log(this.state.inputSearch);
+  			// console.log(this.state.inputSearch,"------------ input sreach data ------------------");
   			if(urlVal == "/#/list"){
 				const procName = this.state.inputSearch
 		    	var listData = {};
@@ -178,7 +178,7 @@ class CommonSearch extends Component {
 
 		        var resData = {};
 		        resData = await getListData(listData);
-		        console.log("========================================");
+		        // console.log("========================================");
 		        // console.log(resData);
 		     
 		        resData.procName = procName;
@@ -238,7 +238,7 @@ class CommonSearch extends Component {
 			const prevSearchVal = this.props.inputProcVal;
 
 			const { cursor,inputSearch,autoInputValue,searchInput } = this.state
-			console.log("00000000000000000000000", prevSearchVal);
+			// console.log("00000000000000000000000", prevSearchVal);
 		return(
 				<div className="input-group searchWrap p-0">
 					<input className="form-control prop_name" type="text" 
