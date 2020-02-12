@@ -6,6 +6,7 @@ import Header from "../header/header.js";
 import Footer from "../footer/footer.js";
 import Filter from "../filter/fiter.js";
 import {getListData} from "../../dataParser/getListData.js";
+import {priceConverter} from "../../common/priceConverter.js";
 // import  "../../assets/js/custom.js";
 import Pagination from "react-js-pagination";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -46,7 +47,7 @@ class ListingBody extends Component {
     	var listData = {};
         listData.query = params[0].query || '';
         listData.size = 4;
-        listData.pageId = params[0].pageNumber || 1;
+        listData.pageId = params[0].pageNumber || params[0].pageId|| 1;
         listData.filters = params[0].filters || [];
 
         var resData = {};
@@ -175,7 +176,7 @@ class ListingBody extends Component {
 														<span className="pr-2">
 								            				<FontAwesomeIcon icon={faTags} className="text-warning" />
 							            				</span>	
-														<span className="pl-1 price_flat ">{listVal.price}</span>
+														<span className="pl-1 price_flat ">&#8377; {priceConverter(listVal.price)}</span>
 													</div>
 													<div className="col-md-4 col-8 media_menu">
 														<span className="pr-2">

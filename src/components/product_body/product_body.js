@@ -1,12 +1,14 @@
 import React, {Component} from "react";
 
+import ShowMoreText from 'react-show-more-text';
 import Lightbox from 'react-image-lightbox';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHome, faRoad, faTableTennis, faDumbbell, faShieldAlt, faSwimmer, faBatteryQuarter} from "@fortawesome/free-solid-svg-icons";
+import {faBiking,faHandHoldingUsd, faTableTennis, faUtensils, faGopuram, faBuilding, faTty, faTree, faHome, faRoad, faFootballBall, faDumbbell, faShieldAlt, faSwimmer, faBatteryQuarter, faFan, faTools, faParking, faWifi, faWater, faBurn, faBookReader} from "@fortawesome/free-solid-svg-icons";
 import  "../../assets/css/main.css";
 import PropertyImg from "../../assets/images/Runwal-mobi.jpg";
 import Floor_img from "../../assets/images/floorplan.jpg"
 import map_img from "../../assets/images/mapImage.jpg"
+import {priceConverter} from "../../common/priceConverter.js";
 
 const images = [
 	PropertyImg,
@@ -33,7 +35,9 @@ class ProductBody extends Component {
 		 const {imagePopup, photoIndex, isOpen, isImageOpen } = this.state;
 		 const procData = this.props.procData;
 		 console.log(procData);
-
+		 
+		const arrIcon = {"intercom facility":faTty, "lift(s)":faBuilding, "feng shui / vaastu compliant":faGopuram, "security / fire alarm":faShieldAlt, "centrally air conditioned":faFan, "private garden / terrace":faTree, "park": faTree, "swimming pool":faSwimmer, "maintenance staff":faTools, "visitor parking":faParking, "internet/wi-fi connectivity":faWifi, "security personnel":faShieldAlt, "club house / community center":faHome, "fitness centre / gym":faDumbbell, "water softening plant":faTree, "water storage":faWater, "piped-gas":faBurn, "restaurant": faUtensils, "badminton court":faTableTennis, "cricket pitch":faFootballBall, "basketball court":faFootballBall, "squash court":faFootballBall, "atm":faHandHoldingUsd, "indoor game room":faTableTennis, "rainwater harvesting":faWater, "landscaped garden":faTree, "cycling & jogging track":faBiking, "children play area":faTableTennis, "gym":faDumbbell, "library":faBookReader};
+		
 		return(
 
 			<div className="content-wrapper">
@@ -71,57 +75,92 @@ class ProductBody extends Component {
 					          <ul className="list-unstyled prop_align mt-2">
 					            <li>
 					            	<div className="row">
-					            		{procData.bed_config ? 
 						            		<div className="col-sm-4 col-4">
 						            			<div className="p_title">Bedrooms</div>
-						            			<div className="p_value">{procData.bed_config}
-						            			</div>
+					            				{procData.bed_config ? 
+						            				<div className="p_value">{procData.bed_config}</div>
+						            				:
+						            				<div className="p_value">-</div>
+							            		}
 						            		</div>
-						            		:
-						            		''
-					            		}
-					            		<div className="col-sm-4 col-4">
-					            			<div className="p_title">Bathrooms</div>
-					            			<div className="p_value">{procData.bath_no}</div>
-					            		</div>
-					            		<div className="col-sm-4 col-4">
-					            			<div className="p_title">Balcony</div>
-					            			<div className="p_value">1</div>
-					            		</div>
+
+						            		<div className="col-sm-4 col-4">
+						            			<div className="p_title">Bathrooms</div>
+					            				{procData.bath_no ? 
+						            				<div className="p_value">{procData.bath_no}</div>
+						            				:
+						            				<div className="p_value">-</div>
+								            	}
+						            		</div>
+						            	
+						            		<div className="col-sm-4 col-4">
+						            			<div className="p_title">Balcony</div>
+						            			{procData.balcony ? 
+						            				<div className="p_value">{procData.balcony}</div>
+						            				:
+						            				<div className="p_value">-</div>
+								            	}	
+						            		</div>
 					            	</div>
 				            	</li>
 				            	<hr />
 				            	<li>
 					            	<div className="row">
-					            		<div className="col-sm-4 col-4">
-					            			<div className="p_title">Rate per Sq.ft</div>
-					            			<div className="p_value">{procData.rateperfeet}</div>
-					            		</div>
-					            		<div className="col-sm-4 col-4">
-					            			<div className="p_title">Carpet area</div>
-					            			<div className="p_value">{procData.property_area} sq.ft</div>
-					            		</div>
-					            		<div className="col-sm-4 col-4">
-					            			<div className="p_title">Price</div>
-					            			<div className="p_value">{procData.price}</div>
-					            		</div>
+					            			<div className="col-sm-4 col-4">
+					            				<div className="p_title">Rate per Sq.ft</div>
+					            				{procData.rateperfeet ? 
+					            					<div className="p_value">{procData.rateperfeet}</div>
+					            					:
+					            					<div className="p_value">-</div>
+							            		}
+					            			</div>
+					            		
+						            		<div className="col-sm-4 col-4">
+						            			<div className="p_title">Carpet area</div>
+					            				{procData.property_area ? 
+						            				<div className="p_value">{procData.property_area} sq.ft</div>
+						            				:
+						            				<div className="p_value">-</div>
+								            	}
+						            		</div>
+						            		<div className="col-sm-4 col-4">
+						            			<div className="p_title">Price</div>
+						            			{procData.price ? 
+						            				<div className="p_value">&#8377; {priceConverter(procData.price)}</div>
+						            				:
+						            				<div className="p_value">-</div>
+								            	}
+						            		</div>
 					            	</div>
 				            	</li>
 				            	<hr />
 				            	<li>
 					            	<div className="row">
-					            		<div className="col-sm-4 col-4">
-					            			<div className="p_title">Status</div>
-					            			<div className="p_value">{procData.possession}</div>
-					            		</div>
-					            		<div className="col-sm-4 col-4">
-					            			<div className="p_title">Car parking</div>
-					            			<div className="p_value">1 covered</div>
-					            		</div>
-					            		<div className="col-sm-4 col-4">
-					            			<div className="p_title">Floor</div>
-					            			<div className="p_value">{procData.floors}</div>
-					            		</div>
+						            		<div className="col-sm-4 col-4">
+						            			<div className="p_title">Status</div>
+					            				{procData.sale_type ? 
+						            				<div className="p_value">{procData.sale_type}</div>
+					            					:
+						            				<div className="p_value">-</div>
+								            	}	
+						            		</div>
+						            		<div className="col-sm-4 col-4">
+						            			<div className="p_title">Car parking</div>
+					            				{procData.parking ? 
+						            				<div className="p_value">{procData.parking}</div>
+						            				:
+						            				<div className="p_value">-</div>
+								            	}
+						            		</div>
+
+						            		<div className="col-sm-4 col-4">
+						            			<div className="p_title">Floor</div>
+						            			{procData.floors ?
+						            				<div className="p_value">{procData.floors}</div>
+						            				:
+						            				<div className="p_value">-</div>
+								            	}	
+						            		</div>
 					            	</div>
 				            	</li>
 				            	<hr />
@@ -157,7 +196,23 @@ class ProductBody extends Component {
 					        </div>
 					        <div className="col-md-12">
 					          <h6 className="pl-3">Description</h6>
-					          <p className="pl-4 p_value">{procData.desctipition}</p>
+					          	{procData.desctipition ?
+					          		<div className="pl-4 p_value mb-3">	
+						          		<ShowMoreText
+							                lines={3}
+							                more='Show more'
+							                less='Show less'
+							                anchorClass=''
+							                onClick={this.executeOnClick}
+							                expanded={false}
+							                width={0}
+							            >
+							              {procData.desctipition}
+							            </ShowMoreText> 
+						           	</div> 
+					          		:
+					          		<p className="pl-4 p_value">Not available</p>
+					          	}	
 					        </div>
 					        <div className="col-md-2 col-6">
 					          <ul className="list-unstyled text-center">
@@ -167,50 +222,82 @@ class ProductBody extends Component {
 					        </div>
 					        <div className="col-md-2 col-6">
 					          <ul className="list-unstyled text-center">
-					            <li><span className="over_prop">Price Negotiable</span></li>
-					            <li><span>No</span></li>
+					            <li><span className="over_prop">Possession</span></li>
+					            {procData.possession ?
+						            <li><span>{procData.possession}</span></li>
+						            :
+						            <li><span>-</span></li>
+						        }
 					          </ul>
 					        </div>
 					        <div className="col-md-2 col-6">
 					          <ul className="list-unstyled text-center">
 					            <li><span className="over_prop">Booking Amount</span></li>
-					            <li><span>99,0000</span></li>
+					            {procData.booking_amount ?
+					            	<li><span>99,0000</span></li>
+					            	:
+					            	<li><span>-</span></li>
+					            }	
 					          </ul>
 					        </div>
 					        <div className="col-md-2 col-6">
 					          <ul className="list-unstyled text-center">
 					            <li><span className="over_prop">Security Deposit</span></li>
-					            <li><span>No Deposit</span></li>
+					            {procData.security_deposite ?	
+					            	<li><span>No Deposit</span></li>
+					            	:
+					            	<li><span>-</span></li>
+					            }	
 					          </ul>
 					        </div>
 					        <div className="col-md-2 col-6">
 					          <ul className="list-unstyled text-center">
 					            <li><span className="over_prop">Facing</span></li>
-					            <li><span>NorthEast</span></li>
+					            {procData.facing ? 
+					            	<li><span>{procData.facing}</span></li>
+					            	:
+					            	<li><span>-</span></li>
+					            }	
 					          </ul>
 					        </div>
 					        <div className="col-md-2 col-6">
 					          <ul className="list-unstyled text-center">
 					            <li><span className="over_prop">overlooking</span></li>
-					            <li><span>Garden View</span></li>
+					            {procData.overlooking ? 
+					            	<li><span>Garden View</span></li>
+					            	:
+					            	<li><span>-</span></li>
+					            }	
 					          </ul>
 					        </div>
 					        <div className="col-md-2 col-6">
 					          <ul className="list-unstyled text-center">
-					            <li><span className="over_prop">Ownership Type</span></li>
-					            <li><span>Freehold</span></li>
+					            <li><span className="over_prop">Watersupply</span></li>
+					            {procData.watersupply_type ? 
+					            	<li><span>{procData.watersupply_type}</span></li>
+					            	:
+					            	<li><span>-</span></li>
+					            }
 					          </ul>
 					        </div>
 					        <div className="col-md-2 col-6">
 					          <ul className="list-unstyled text-center">
-					            <li><span className="over_prop">Status</span></li>
-					            <li><span>Unfurnished</span></li>
+					            <li><span className="over_prop">Property type</span></li>
+					            {procData.property_type ?
+						            <li><span>{procData.property_type}</span></li>
+						            :
+						            <li><span>-</span></li>
+						        }
 					          </ul>
 					        </div>
 					        <div className="col-md-3">
 					          <ul className="list-unstyled text-center">
-					            <li><span className="over_prop">Property type</span></li>
-					            <li><span>{procData.property_type}</span></li>
+					            <li><span className="over_prop">Room Configuration</span></li>
+					            {procData.room_config ?	
+					            	<li><span>{procData.room_config}</span></li>
+					            	:
+					            	<li><span>-</span></li>
+					            }	
 					          </ul>
 					        </div>
 					    </div>
@@ -223,7 +310,7 @@ class ProductBody extends Component {
 
 							        <div className="col-md-2 col-6" key={ameni}>
 							          <ul className="list-unstyled text-center">
-							            <li><span><FontAwesomeIcon icon={faHome} className="text-danger animity_icon" /></span></li>
+							            <li><span><FontAwesomeIcon icon={arrIcon[ameni]} className="text-danger animity_icon" /></span></li>
 							            <li> <span className="animity_name" >{ameni}</span></li>
 							          </ul>
 							        </div>

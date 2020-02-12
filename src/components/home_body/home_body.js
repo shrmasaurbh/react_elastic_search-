@@ -6,7 +6,7 @@ import  "../../assets/css/main.css";
 import siteImage from "../../assets/images/HomesfyLogo.png";
 import HomeSearch from "../search/homeSearch/homeSearch.js";
 import Loading from "../../common/loader.js"
-// import Header from "../header/header.js";
+import {priceConverter} from "../../common/priceConverter.js";
 import {getSliderData} from "../../dataParser/getHomeData.js";
 import Footer from "../footer/footer.js";
 import PropertyImg from "../../assets/images/Runwal-mobi.jpg";
@@ -73,6 +73,8 @@ class HomeBody extends Component {
 	render(){
 		const trend = this.state.trending;
 		const homeFeature = this.state.featured;
+
+		// trend.map(trend =>trend.price = priceConverter(trend.price));
 
 		const responsive = {
 			desktop: {
@@ -175,8 +177,8 @@ class HomeBody extends Component {
 												<p className="textEllipsis t-capital">{trend.project_name}</p>
 												<div>
 													<ul className="list-unstyled d-flex">
-														<li className="mr-1 text-success"><span>{trend.price}</span></li>
-														<li className="mr-1"><span>1BHK</span></li>
+														<li className="mr-2 text-success"><span>&#8377; {priceConverter(trend.price)}</span></li>
+														<li className="mr-1"><span>{trend.bed_config}BHK</span></li>
 													</ul>
 												</div>
 											</div>
@@ -299,8 +301,8 @@ class HomeBody extends Component {
 														</Link>
 							            			</li>
 								            		<li className="p-1 t-capital">{feature.project_name}</li>
-								            		<li className="p-1 text-info">1BHK, 2BHK, 3BHK</li>
-								            		<li className="p-1">{feature.price}</li>
+								            		<li className="p-1 text-info">{feature.bed_config}BHK</li>
+								            		<li className="p-1">&#8377; {priceConverter(feature.price)}</li>
 								            	</ul>
 								            </div>
 								        </div>    
