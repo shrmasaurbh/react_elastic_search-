@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import {getSearchData} from "../../../dataParser/getHomeData.js";
+import {priceConverter} from "../../../common/priceConverter.js";
 import  { Redirect } from 'react-router-dom';
 import { withRouter } from "react-router";
 import {getListData} from "../../../dataParser/getListData.js";
@@ -254,7 +255,11 @@ class CommonSearch extends Component {
 					<span>
 						<div id="searchsuggestion" ref={node => { this.node = node; }} className={"searchSuggestion popup"+" "+(this.state.searchList ? 'show' : 'hide')}>
 							<ul className="list-unstyled p-2 mb-0">
-					        	{searchInput.map((searchInput, i) => <li onClick={this.handleSuggestClick} data-value={searchInput.project_name} className={"textEllipsis suggestList text-capitalize t-capital" +" "+(cursor === i ? 'active' : null)} key={searchInput.id}>{searchInput.project_name}</li>)}
+					        	{searchInput.map((searchInput, i) => <li onClick={this.handleSuggestClick} data-value={searchInput.project_name} className={"textEllipsis suggestList text-capitalize t-capital" +" "+(cursor === i ? 'active' : null)} key={searchInput.id}>
+					        		<span>{searchInput.project_name}</span>
+					        		<span className="float-right font-weight-bold text-danger">{priceConverter(searchInput.price)}</span>
+					        		<span className="float-right font-weight-bold mr-3">{searchInput.bed_config}BHK</span>
+				        		</li>)}
 					    	</ul>
 				      	</div>
 					</span>

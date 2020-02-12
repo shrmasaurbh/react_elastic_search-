@@ -3,7 +3,7 @@ import React, {Component} from "react";
 import ShowMoreText from 'react-show-more-text';
 import Lightbox from 'react-image-lightbox';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {faBiking,faHandHoldingUsd, faTableTennis, faUtensils, faGopuram, faBuilding, faTty, faTree, faHome, faRoad, faFootballBall, faDumbbell, faShieldAlt, faSwimmer, faBatteryQuarter, faFan, faTools, faParking, faWifi, faWater, faBurn, faBookReader} from "@fortawesome/free-solid-svg-icons";
+import {faSpa, faBiking,faHandHoldingUsd, faTableTennis, faUtensils, faGopuram, faBuilding, faTty, faTree, faHome, faRoad, faFootballBall, faDumbbell, faShieldAlt, faSwimmer, faBatteryQuarter, faFan, faTools, faParking, faWifi, faWater, faBurn, faBookReader, faTheaterMasks, faWrench, faFireExtinguisher, faStore} from "@fortawesome/free-solid-svg-icons";
 import  "../../assets/css/main.css";
 import PropertyImg from "../../assets/images/Runwal-mobi.jpg";
 import Floor_img from "../../assets/images/floorplan.jpg"
@@ -34,9 +34,9 @@ class ProductBody extends Component {
 	render(){
 		 const {imagePopup, photoIndex, isOpen, isImageOpen } = this.state;
 		 const procData = this.props.procData;
-		 console.log(procData);
+		 // console.log(procData.description);
 		 
-		const arrIcon = {"intercom facility":faTty, "lift(s)":faBuilding, "feng shui / vaastu compliant":faGopuram, "security / fire alarm":faShieldAlt, "centrally air conditioned":faFan, "private garden / terrace":faTree, "park": faTree, "swimming pool":faSwimmer, "maintenance staff":faTools, "visitor parking":faParking, "internet/wi-fi connectivity":faWifi, "security personnel":faShieldAlt, "club house / community center":faHome, "fitness centre / gym":faDumbbell, "water softening plant":faTree, "water storage":faWater, "piped-gas":faBurn, "restaurant": faUtensils, "badminton court":faTableTennis, "cricket pitch":faFootballBall, "basketball court":faFootballBall, "squash court":faFootballBall, "atm":faHandHoldingUsd, "indoor game room":faTableTennis, "rainwater harvesting":faWater, "landscaped garden":faTree, "cycling & jogging track":faBiking, "children play area":faTableTennis, "gym":faDumbbell, "library":faBookReader};
+		const arrIcon = {"intercom facility":faTty, "lift(s)":faBuilding, "lift":faBuilding, "power backup":faBatteryQuarter, "feng shui / vaastu compliant":faGopuram, "security / fire alarm":faShieldAlt, "centrally air conditioned":faFan, "private garden / terrace":faTree, "park": faTree, "swimming pool":faSwimmer, "maintenance staff":faTools, "visitor parking":faParking, "internet/wi-fi connectivity":faWifi, "security personnel":faShieldAlt, "club house / community center":faHome, "fitness centre / gym":faDumbbell, "water softening plant":faTree, "water storage":faWater, "piped-gas":faBurn, "restaurant": faUtensils, "badminton court":faTableTennis, "cricket pitch":faFootballBall, "basketball court":faFootballBall, "squash court":faFootballBall, "atm":faHandHoldingUsd, "indoor game room":faTableTennis, "rainwater harvesting":faWater, "landscaped garden":faTree, "cycling & jogging track":faBiking, "children play area":faTableTennis, "gym":faDumbbell, "library":faBookReader, "spa":faSpa, "tennis court":faTableTennis, "amphitheatre":faTheaterMasks, "rain water harvesting" :faWater, "sports area":faTableTennis, "24x7 security":faShieldAlt, "service/goods lift":faBuilding, "sewage treatment plant":faWrench, "internal roads":faRoad, "community hall":faBuilding, "aerobics room": faDumbbell, "high-tech alarm system":faShieldAlt, "fire fighting systems":faFireExtinguisher, "utility shops":faStore};
 		
 		return(
 
@@ -196,18 +196,18 @@ class ProductBody extends Component {
 					        </div>
 					        <div className="col-md-12">
 					          <h6 className="pl-3">Description</h6>
-					          	{procData.desctipition ?
+					          	{procData.description ?
 					          		<div className="pl-4 p_value mb-3">	
 						          		<ShowMoreText
 							                lines={3}
 							                more='Show more'
 							                less='Show less'
-							                anchorClass=''
+							                anchorClass='text-lowercase'
 							                onClick={this.executeOnClick}
 							                expanded={false}
 							                width={0}
 							            >
-							              {procData.desctipition}
+							              {procData.description}
 							            </ShowMoreText> 
 						           	</div> 
 					          		:
@@ -285,6 +285,16 @@ class ProductBody extends Component {
 					            <li><span className="over_prop">Property type</span></li>
 					            {procData.property_type ?
 						            <li><span>{procData.property_type}</span></li>
+						            :
+						            <li><span>-</span></li>
+						        }
+					          </ul>
+					        </div>
+					        <div className="col-md-2 col-6">
+					          <ul className="list-unstyled text-center">
+					            <li><span className="over_prop">Furnish</span></li>
+					            {procData.furnish ?
+						            <li><span>{procData.furnish}</span></li>
 						            :
 						            <li><span>-</span></li>
 						        }

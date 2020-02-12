@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import {getSearchData} from "../../../dataParser/getHomeData.js";
 import  { Redirect } from 'react-router-dom';
 import { withRouter } from "react-router";
+import {priceConverter} from "../../../common/priceConverter.js";
 
 class HomeSearch extends Component {
 	constructor(props){
@@ -155,7 +156,11 @@ class HomeSearch extends Component {
 						<span>
 							<div id="searchsuggestion" ref={node => { this.node = node; }} className={"searchSuggestion popup"+" "+(this.state.searchList ? 'show' : 'hide')}>
 								<ul className="list-unstyled p-2 mb-0">
-						        	{ this.state.searchInput.map((searchInput, i) => <li onClick={this.handleSuggestClick} data-value={searchInput.project_name} className={"textEllipsis suggestList text-capitalize t-capital" +" "+(cursor === i ? 'active' : null)} key={searchInput.id}>{searchInput.project_name}</li>)}
+						        	{ this.state.searchInput.map((searchInput, i) => <li onClick={this.handleSuggestClick} data-value={searchInput.project_name} className={"textEllipsis suggestList text-capitalize t-capital" +" "+(cursor === i ? 'active' : null)} key={searchInput.id}>
+						        		<span>{searchInput.project_name}</span>
+						        		<span className="float-right font-weight-bold text-danger">{priceConverter(searchInput.price)}</span>
+						        		<span className="float-right font-weight-bold mr-3">{searchInput.bed_config}BHK</span>
+					        		</li>)}
 						    	</ul>
 					      	</div>
 						</span>
