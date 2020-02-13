@@ -105,7 +105,7 @@ class ProductBody extends Component {
 					            			<div className="col-sm-4 col-4">
 					            				<div className="p_title">Rate per Sq.ft</div>
 					            				{procData.rateperfeet ? 
-					            					<div className="p_value">{procData.rateperfeet}</div>
+					            					<div className="p_value">&#8377; {procData.rateperfeet}</div>
 					            					:
 					            					<div className="p_value">-</div>
 							            		}
@@ -135,7 +135,7 @@ class ProductBody extends Component {
 						            		<div className="col-sm-4 col-4">
 						            			<div className="p_title">Status</div>
 					            				{procData.sale_type ? 
-						            				<div className="p_value">{procData.sale_type}</div>
+						            				<div className="p_value text-capitalize">{procData.sale_type}</div>
 					            					:
 						            				<div className="p_value">-</div>
 								            	}	
@@ -143,7 +143,7 @@ class ProductBody extends Component {
 						            		<div className="col-sm-4 col-4">
 						            			<div className="p_title">Car parking</div>
 					            				{procData.parking ? 
-						            				<div className="p_value">{procData.parking}</div>
+						            				<div className="p_value text-capitalize">{procData.parking}</div>
 						            				:
 						            				<div className="p_value">-</div>
 								            	}
@@ -152,7 +152,7 @@ class ProductBody extends Component {
 						            		<div className="col-sm-4 col-4">
 						            			<div className="p_title">Floor</div>
 						            			{procData.floors ?
-						            				<div className="p_value">{procData.floors}</div>
+						            				<div className="p_value text-capitalize">{procData.floors}</div>
 						            				:
 						            				<div className="p_value">-</div>
 								            	}	
@@ -200,7 +200,7 @@ class ProductBody extends Component {
 					          <ul className="list-unstyled text-center">
 					            <li><span className="over_prop">Possession</span></li>
 					            {procData.possession ?
-						            <li><span>{procData.possession}</span></li>
+						            <li><span className="text-capitalize">{procData.possession}</span></li>
 						            :
 						            <li><span>-</span></li>
 						        }
@@ -250,7 +250,7 @@ class ProductBody extends Component {
 					          <ul className="list-unstyled text-center">
 					            <li><span className="over_prop">Watersupply</span></li>
 					            {procData.watersupply_type ? 
-					            	<li><span>{procData.watersupply_type}</span></li>
+					            	<li><span className="text-capitalize">{procData.watersupply_type}</span></li>
 					            	:
 					            	<li><span>-</span></li>
 					            }
@@ -260,7 +260,7 @@ class ProductBody extends Component {
 					          <ul className="list-unstyled text-center">
 					            <li><span className="over_prop">Property type</span></li>
 					            {procData.property_type ?
-						            <li><span>{procData.property_type}</span></li>
+						            <li><span className="text-capitalize">{procData.property_type}</span></li>
 						            :
 						            <li><span>-</span></li>
 						        }
@@ -270,7 +270,7 @@ class ProductBody extends Component {
 					          <ul className="list-unstyled text-center">
 					            <li><span className="over_prop">Furnish</span></li>
 					            {procData.furnish ?
-						            <li><span>{procData.furnish}</span></li>
+						            <li><span className="text-capitalize">{procData.furnish}</span></li>
 						            :
 						            <li><span>-</span></li>
 						        }
@@ -319,7 +319,7 @@ class ProductBody extends Component {
 							        <div className="col-md-2 col-6" key={ameni}>
 							          <ul className="list-unstyled text-center">
 							            <li><span><FontAwesomeIcon icon={arrIcon[ameni]} className="text-danger animity_icon" /></span></li>
-							            <li> <span className="animity_name" >{ameni}</span></li>
+							            <li> <span className="animity_name text-capitalize" >{ameni}</span></li>
 							          </ul>
 							        </div>
 
