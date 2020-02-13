@@ -35,7 +35,7 @@ class Header extends Component {
 	}
 
 	render(){
-		console.log("this.props.inputValue",this.props.inputValue);
+		// console.log("this.props.inputValue",this.props.inputValue);
 		const inputProcVal =  this.props.inputValue;
 
 		const isDesktop = this.state.screenWidth;

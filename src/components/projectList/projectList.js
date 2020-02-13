@@ -68,8 +68,8 @@ class ListingBody extends Component {
 	}
 
 	handleChangePage= async (pageNumber)=>{
-		console.log(`active page is ${pageNumber}`);
-		console.log("this.state.filters pagination", this.state.filters);
+		// console.log(`active page is ${pageNumber}`);
+		// console.log("this.state.filters pagination", this.state.filters);
         this.setState({showLoader : true})
     	this.setState({activePage: pageNumber});
     	const procName = this.props.inputValue
@@ -105,8 +105,8 @@ class ListingBody extends Component {
 	handleFilter = async (filterData) => {
         this.setState({showLoader : true})
         this.setState({filters : filterData})
-		console.log("===========FilterVal==========");
-		console.log(filterData);
+		// console.log("===========FilterVal==========");
+		// console.log(filterData);
         // let filters = [];
         // const procName = this.props.inputValue
     	let listData = {};
@@ -116,7 +116,7 @@ class ListingBody extends Component {
         listData.pageId = 1;
         listData.filters = [filterData];
 
-    	console.log("listData.filters",listData.filters);
+    	// console.log("listData.filters",listData.filters);
         this.genericGetListData(listData);
 
         // var resData = {};

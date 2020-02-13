@@ -40,7 +40,7 @@ class HomeSearch extends Component {
 	    if(event.target.value.length>=2){
 		    resData =await getSearchData(event.target.value);
 		    // console.log("homsearch");
-		    console.log("resData",resData);
+		    // console.log("resData",resData);
 		    if(resData.data.length>0){
 		    	this.setState({})
 		    	this.setState({
@@ -64,9 +64,9 @@ class HomeSearch extends Component {
 	}
 
 	handlePopUp = () => {
-	    console.log("this.state.popupVisible");
-	    console.log(this.state.popupVisible);
-	    console.log(this.node);
+	    // console.log("this.state.popupVisible");
+	    // console.log(this.state.popupVisible);
+	    // console.log(this.node);
 	    if (!this.state.popupVisible) {
 	      // attach/remove event handler
 	      document.addEventListener('click', this.handleOutsideClick, false);
@@ -83,7 +83,7 @@ class HomeSearch extends Component {
   	}
 
   	handleOutsideClick=(e)=> {
-  		console.log(this.node);
+  		// console.log(this.node);
 	    // ignore clicks on the component itself
 	    // if (this.node) {
 	    //   return;
@@ -106,7 +106,7 @@ class HomeSearch extends Component {
 	      var selected = searchInput[cursor-1].project_name;
 	    } else if (e.keyCode === 40 && cursor < searchInput.length - 1) {
 	      if(cursor===-1){
-    		console.log(this.state.cursor,"this.state.cursor atb  home page");  
+    		// console.log(this.state.cursor,"this.state.cursor atb  home page");  
 		      this.setState({
 		        cursor: cursor + 1
 		      })

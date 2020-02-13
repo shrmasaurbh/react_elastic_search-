@@ -32,18 +32,18 @@ class Filter extends Component {
     };
 
     handleLangChange = (event) => {
-    	console.log("in the hanldle===============");
+    	// console.log("in the hanldle===============");
     	this.setState({activeApply : false})
     	var arrBhk = [];
     	let filters = [];
         if(event.target.className.includes("filter_bhk")){
-        	console.log("attrrrr",event.target.className)
+        	// console.log("attrrrr",event.target.className)
         	var bhk = parseInt(event.target.getAttribute('value'));
         	arrBhk.push(bhk);
         	this.setState({bhk: arrBhk});
         }else{
         	if(event.target.className.includes("from_price")){
-        	console.log("priceeeee",event.target.value)
+        	// console.log("priceeeee",event.target.value)
         		var from = parseInt(event.target.value); 
 	        	this.setState({from: from});
         	}else if(event.target.className.includes("to_price")){
@@ -102,7 +102,7 @@ class Filter extends Component {
     	// }
     	this.setState({activeClear : false});
     	this.props.changeFilter();
-        console.log("=== state of the filter ====",filterData);
+        // console.log("=== state of the filter ====",filterData);
         this.props.filterData(filterData);  
 
     }
@@ -124,7 +124,7 @@ class Filter extends Component {
     }
 
     toggle= (position) =>{
-	    	console.log("in the toggle =============",this.state.active )
+	    	// console.log("in the toggle =============",this.state.active )
 	    if (this.state.active === position) {
 	      this.setState({active : null})
 	    } else {

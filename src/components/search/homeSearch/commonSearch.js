@@ -41,7 +41,7 @@ class CommonSearch extends Component {
 	    if(event.target.value.length>=2){
 		    resData =await getSearchData(event.target.value);
 		    // console.log("homsearch");
-		    console.log("resData11111111111111",resData.meta,resData.data);
+		    // console.log("resData11111111111111",resData.meta,resData.data);
 		    if(resData.meta.count > 0){
 		    	this.setState({
 		    		searchList: true,
@@ -68,10 +68,10 @@ class CommonSearch extends Component {
 	    }));
 	    if (!this.state.popupVisible) {
 	      // attach/remove event handler
-	    		console.log("addEventListener")
+	    		// console.log("addEventListener")
 	      document.addEventListener('click', this.handleOutsideClick, false);
 	    } else {
-	    		console.log("reemoveEventListener")
+	    		// console.log("reemoveEventListener")
 		      
 		      document.removeEventListener('click', this.handleOutsideClick, false);
 
@@ -83,9 +83,9 @@ class CommonSearch extends Component {
   	}
   
   	handlePopUp = () => {
-	    console.log("this.state.popupVisible");
-	    console.log(this.state.popupVisible);
-	    console.log(this.node);
+	    // console.log("this.state.popupVisible");
+	    // console.log(this.state.popupVisible);
+	    // console.log(this.node);
 	    if (!this.state.popupVisible) {
 	      // attach/remove event handler
 	      document.addEventListener('click', this.handleOutsideClick, false);
@@ -163,8 +163,8 @@ class CommonSearch extends Component {
   			const urlOrigin = window.location.origin;
   			const urlHref = window.location.href;
   			let urlVal = urlHref.substr(urlOrigin.length, 7);
-  			console.log(urlVal);
-  			console.log(this.state.inputSearch);
+  			// console.log(urlVal);
+  			// console.log(this.state.inputSearch);
   			if(urlVal == "/#/list"){
 				const procName = this.state.autoInputValue
 		    	var listData = {};
@@ -175,7 +175,7 @@ class CommonSearch extends Component {
 
 		        var resData = {};
 		        resData = await getListData(listData);
-		        console.log("========================================");
+		        // console.log("========================================");
 		        // console.log(resData,"resData on enter serach");
 		     
 		        resData.procName = procName;
@@ -199,7 +199,7 @@ class CommonSearch extends Component {
   			const urlOrigin = window.location.origin;
   			const urlHref = window.location.href;
   			let urlVal = urlHref.substr(urlOrigin.length, 7);
-  			console.log(urlVal);
+  			// console.log(urlVal);
   			// console.log(this.state.inputSearch,"------------ input sreach data ------------------");
   			if(urlVal == "/#/list"){
 				const procName = this.state.inputSearch
@@ -238,7 +238,7 @@ class CommonSearch extends Component {
   			const urlOrigin = window.location.origin;
   			const urlHref = window.location.href;
   			let urlVal = urlHref.substr(urlOrigin.length, 7);
-  			console.log(urlVal);
+  			// console.log(urlVal);
   			// console.log(this.state.inputSearch);
   			if(urlVal == "/#/list"){
 				const procName = suggestVal
@@ -250,7 +250,7 @@ class CommonSearch extends Component {
 
 		        var resData = {};
 		        resData = await getListData(listData);
-		        console.log("========================================");
+		        // console.log("========================================");
 		        // console.log(resData);
 		     
 		        resData.procName = procName;

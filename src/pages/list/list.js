@@ -23,7 +23,7 @@ class List extends Component {
 		this.setState({showLoader : true})
         const projectName  = queryString.parse(this.props.location.search);
         const procName = projectName.q;
-        console.log("44444444444444444444444", procName);
+        // console.log("44444444444444444444444", procName);
         this.setState({listTitle : procName});
 
         var listData = {};
@@ -34,8 +34,8 @@ class List extends Component {
 
         var resData = {};
         resData = await getListData(listData);
-        console.log("========================================");
-        console.log(resData);
+        // console.log("========================================");
+        // console.log(resData);
         setTimeout(()=>{
         	if(resData.meta.count >= 0){
         		
@@ -48,7 +48,7 @@ class List extends Component {
 
     handleSearchData = (data) =>{
 		this.setState({showLoader : true})
-		console.log(data.procName,"1111111111110000000000000000000000");
+		// console.log(data.procName,"1111111111110000000000000000000000");
 		setTimeout(()=>{
         	if(data.meta.count >= 0){
         		
@@ -63,7 +63,7 @@ class List extends Component {
 
 
 	render(){
-		console.log(this.state.listTitle)
+		// console.log(this.state.listTitle)
 		return( 
 			<div>
 				<Loading show={this.state.showLoader} />
