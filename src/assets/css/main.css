@@ -433,9 +433,9 @@
     float: right;
     background-color: #56A366 !important;
     /*border-radius: 6px;*/
-    padding: 4px 8px;
+    padding: 4px 8px !important;
     right: 8px;
-    color: #fff;
+    color: #fff !important;
     position: relative;
     cursor: pointer;
 }
@@ -482,6 +482,14 @@
 	padding: 0px 10px;
 }
 
+.featureProcName{
+	font-size: 14px;
+}
+
+.apply_filter[disabled]{
+	cursor: not-allowed;
+}
+
 /* ===================================================================================================*/
 
 @media only screen and (max-width:991px){
@@ -515,7 +523,7 @@
 	}
 	.three_bar{
 		position: relative;
-		font-size: 16px;
+		font-size: 20px;
 	    z-index: 10;
 	    top: 4px;
 	    right: 0px;
@@ -541,9 +549,10 @@
 	}
 	.media_filter_block {
 	    position: fixed!important;
-	    left:14px;
+	    left: 8%;
 	    background-color: #fff;
 	    z-index: 100;
+	    top: 10%;
 	    padding: 1rem;
 	    box-shadow: 5px 5px 5px 5px rgba(68, 68, 68, 0.6);
 	}
@@ -560,9 +569,10 @@
 	    margin-top: 10px;
 	}
 	.mobile_search{
-		font-size: 16px;
-		position: relative;
-		top: 4px;
+		font-size: 20px;
+	    position: relative;
+	    top: 0px;
+	    margin-left: 6px;
 	}
 	.hide{
 		display: none!important;

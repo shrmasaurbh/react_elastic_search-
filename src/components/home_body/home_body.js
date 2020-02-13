@@ -38,6 +38,7 @@ class HomeBody extends Component {
         this.update();
         this.trending();
         this.feature();
+
       }
     update = () => {
         this.setState({
@@ -54,7 +55,7 @@ class HomeBody extends Component {
     			this.setState({trending: trendData.data});
 		        this.setState({showLoader : false})
         	}
-        },2000)
+        },500)
 
     }
 
@@ -67,7 +68,7 @@ class HomeBody extends Component {
     			this.setState({featured: featureData.data});
 		        this.setState({showLoader : false})
         	}
-        },2000)
+        },500)
     }
 
 	render(){
@@ -143,7 +144,7 @@ class HomeBody extends Component {
 						<div className="prjectSuggestion">
 							<Carousel
 								swipeable={true}
-								draggable={false}
+								draggable={true}
 								showDots={false}
 								responsive={responsive}
 								ssr={true} // means to render carousel on server-side.
@@ -269,11 +270,11 @@ class HomeBody extends Component {
 				    <div className="Homestrending">
 				    	<Carousel
 								swipeable={true}
-								draggable={false}
+								draggable={true}
 								showDots={false}
 								responsive={trendResponsive}
 								ssr={true} // means to render carousel on server-side.
-								infinite={false}
+								infinite={true}
 								autoPlay={false}
 								autoPlaySpeed={2000}
 								keyBoardControl={true}
@@ -300,7 +301,7 @@ class HomeBody extends Component {
 															<h3 className="p-1 textEllipsis procDescTitle t-capital">{feature.title}</h3>
 														</Link>
 							            			</li>
-								            		<li className="p-1 t-capital">{feature.project_name}</li>
+								            		<li className="p-1 t-capital"><h5 className="textEllipsis featureProcName">{feature.project_name}</h5></li>
 								            		<li className="p-1 text-info">{feature.bed_config}BHK</li>
 								            		<li className="p-1">&#8377; {priceConverter(feature.price)}</li>
 								            	</ul>

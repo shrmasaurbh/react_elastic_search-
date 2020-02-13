@@ -46,8 +46,8 @@ class ListingBody extends Component {
         // console.log("this.state.filters",this.state.filters);
     	var listData = {};
         listData.query = params[0].query || '';
-        listData.size = 4;
-        listData.pageId = params[0].pageNumber || params[0].pageId|| 1;
+        listData.size = 8;
+        listData.pageId = params[0].pageNumber || params[0].pageId || 1;
         listData.filters = params[0].filters || [];
 
         var resData = {};
@@ -64,7 +64,7 @@ class ListingBody extends Component {
 		        this.setState({showLoader : false})
         		window.scrollTo(0, 0);
         	}
-        },1000)
+        },500)
 	}
 
 	handleChangePage= async (pageNumber)=>{
@@ -76,7 +76,7 @@ class ListingBody extends Component {
     	var listData = {};
     	listData.filters = [];
         listData.query = procName;
-        listData.size = 4;
+        listData.size = 8;
         listData.pageId = pageNumber;
         listData.filters = [this.state.filters] || [];
         
@@ -112,7 +112,7 @@ class ListingBody extends Component {
     	let listData = {};
     	listData.filters = [];
         listData.query = this.props.inputValue;
-        listData.size = 4;
+        listData.size = 8;
         listData.pageId = 1;
         listData.filters = [filterData];
 

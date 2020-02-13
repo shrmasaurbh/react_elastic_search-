@@ -4,6 +4,7 @@ import {priceConverter} from "../../../common/priceConverter.js";
 import  { Redirect } from 'react-router-dom';
 import { withRouter } from "react-router";
 import {getListData} from "../../../dataParser/getListData.js";
+import Aux from "../../../utils/Aux/aux.js";
 
 class CommonSearch extends Component {
 	constructor(props){
@@ -14,12 +15,25 @@ class CommonSearch extends Component {
       		cursor:-1,
       		inputSearch : '',
       		autoInputValue : this.props.inputProcVal,
-      		popupVisible: false
+      		popupVisible: false,
+      		screenWidth: 0 
     	};
     	this.handleChange = this.handleChange.bind(this);
     	this.handleKeyDown = this.handleKeyDown.bind(this);
     	this.handleSearch = this.handleSearch.bind(this);
+    	window.addEventListener("resize", this.update);
 	}
+
+	componentDidMount() {
+        this.update();
+
+      }
+    update = () => {
+        this.setState({
+          screenWidth: window.innerWidth
+        });
+    };
+
 	handleChange = async event => {
 	    this.setState({ inputSearch: event.target.value });
 	    // const inputSearch = {inputSearch : event.target.value};
@@ -49,34 +63,52 @@ class CommonSearch extends Component {
 	    
 	}
 	handleDropdown = () => {
-    this.setState(prevState => ({
-       popupVisible: !prevState.popupVisible,
-    }));
-    if (!this.state.popupVisible) {
-      // attach/remove event handler
-    		console.log("addEventListener")
-      document.addEventListener('click', this.handleOutsideClick, false);
-    } else {
-    		console.log("reemoveEventListener")
-	      
-	      document.removeEventListener('click', this.handleOutsideClick, false);
+	    this.setState(prevState => ({
+	       popupVisible: !prevState.popupVisible,
+	    }));
+	    if (!this.state.popupVisible) {
+	      // attach/remove event handler
+	    		console.log("addEventListener")
+	      document.addEventListener('click', this.handleOutsideClick, false);
+	    } else {
+	    		console.log("reemoveEventListener")
+		      
+		      document.removeEventListener('click', this.handleOutsideClick, false);
 
-	      this.setState({
+		      this.setState({
+				    		searchList: false,
+				    	})
+	    }
+
+  	}
+  
+  	handlePopUp = () => {
+	    console.log("this.state.popupVisible");
+	    console.log(this.state.popupVisible);
+	    console.log(this.node);
+	    if (!this.state.popupVisible) {
+	      // attach/remove event handler
+	      document.addEventListener('click', this.handleOutsideClick, false);
+	    } else {
+		      document.removeEventListener('click', this.handleOutsideClick, false);
+		      this.setState({
 			    		searchList: false,
 			    	})
-    }
+	    }
+	    this.setState(prevState => ({
+	       popupVisible: !prevState.popupVisible,
+	    }));
 
-  }
-  
+  	}
 
 	handleOutsideClick=(e)=> {
 		// console.log(e.target , "111111111111111111111111111");
 	    // ignore clicks on the component itself
-	    if (this.node.contains(e.target)) {
-	      return;
-	    }
+	    // if (this.node.contains(e.target)) {
+	    //   return;
+	    // }
 	    
-	    this.handleDropdown();
+	    this.handlePopUp();
 	}
 
 	handleKeyDown=(e)=> {
@@ -173,7 +205,7 @@ class CommonSearch extends Component {
 				const procName = this.state.inputSearch
 		    	var listData = {};
 		        listData.query = procName;
-		        listData.size = 4;
+		        listData.size = 8;
 		        listData.pageId = 1;
 		        listData.filters = [];
 
@@ -212,7 +244,7 @@ class CommonSearch extends Component {
 				const procName = suggestVal
 		    	var listData = {};
 		        listData.query = procName;
-		        listData.size = 4;
+		        listData.size = 8;
 		        listData.pageId = 1;
 		        listData.filters = [];
 
@@ -238,32 +270,70 @@ class CommonSearch extends Component {
 
 			const prevSearchVal = this.props.inputProcVal;
 
-			const { cursor,inputSearch,autoInputValue,searchInput } = this.state
-			// console.log("00000000000000000000000", prevSearchVal);
+			const { cursor,inputSearch,autoInputValue,searchInput,screenWidth} = this.state
+			// console.log("00000000000000000000000", screenWidth);
 		return(
-				<div className="input-group searchWrap p-0">
-					<input className="form-control prop_name" type="text" 
-						onChange={this.handleChange} 
-						onKeyDown={ this.handleKeyDown } 
-						placeholder="Search by Project Name, City or Area Keywords" 
-						aria-label="Recipient's username" aria-describedby="basic-addon2"
-						value = {autoInputValue } />
-					<input className="form-control name_hide" type="hidden" />
-					<div className="input-group-append">
-						<button className="input-group btn text-white" onClick={this.handleClick}>search</button>
-					</div>
-					<span>
-						<div id="searchsuggestion" ref={node => { this.node = node; }} className={"searchSuggestion popup"+" "+(this.state.searchList ? 'show' : 'hide')}>
-							<ul className="list-unstyled p-2 mb-0">
-					        	{searchInput.map((searchInput, i) => <li onClick={this.handleSuggestClick} data-value={searchInput.project_name} className={"textEllipsis suggestList text-capitalize t-capital" +" "+(cursor === i ? 'active' : null)} key={searchInput.id}>
-					        		<span>{searchInput.project_name}</span>
-					        		<span className="float-right font-weight-bold text-danger">{priceConverter(searchInput.price)}</span>
-					        		<span className="float-right font-weight-bold mr-3">{searchInput.bed_config}BHK</span>
-				        		</li>)}
-					    	</ul>
-				      	</div>
-					</span>
-				</div>
+				<Aux>
+					{ screenWidth > 991 ? 
+						<div className="input-group searchWrap p-0" ref={node => { this.node = node; }}>
+							<input className="form-control prop_name" type="text" 
+								onChange={this.handleChange} 
+								onClick={this.handlePopUp}
+								onKeyDown={ this.handleKeyDown } 
+								placeholder="Search by Project Name, City or Area Keywords" 
+								aria-label="Recipient's username" aria-describedby="basic-addon2"
+								value = {autoInputValue } />
+							<input className="form-control name_hide" type="hidden" />
+							<div className="input-group-append">
+								<button className="input-group btn text-white" onClick={this.handleClick}>search</button>
+							</div>
+							<span>
+								<div id="searchsuggestion" ref={node => { this.node = node; }} className={"searchSuggestion popup"+" "+(this.state.searchList ? 'show' : 'hide')}>
+									<ul className="list-unstyled p-2 mb-0">
+							        	{searchInput.map((searchInput, i) => <li onClick={this.handleSuggestClick} data-value={searchInput.project_name} className={"textEllipsis suggestList text-capitalize t-capital" +" "+(cursor === i ? 'active' : null)} key={searchInput.id}>
+							        		<div className="row">
+							        			<div className="col-lg-9 col-md-9 col-sm-9 col-9">
+							        				<span>{searchInput.project_name}</span>
+							        			</div>
+							        			<div className="bedConfig">
+									        		<span className="mr-3">{searchInput.bed_config}BHK</span>
+							        			</div>
+							        			<div className="pricePoject">
+									        		<span className="text-danger">&#8377; {priceConverter(searchInput.price)}</span>
+							        			</div>
+							        		</div>
+						        		</li>)}
+							    	</ul>
+						      	</div>
+							</span>
+						</div>
+						:
+						<div className="input-group searchWrap p-0">
+							<input className="form-control prop_name" type="text" 
+								onChange={this.handleChange}
+								onClick={this.handlePopUp} 
+								onKeyDown={ this.handleKeyDown } 
+								placeholder="Search by Project Name, City or Area Keywords" 
+								aria-label="Recipient's username" aria-describedby="basic-addon2"
+								value = {autoInputValue } />
+							<input className="form-control name_hide" type="hidden" />
+							<div className="input-group-append">
+								<button className="input-group btn text-white" onClick={this.handleClick}>search</button>
+							</div>
+							<span>
+								<div id="searchsuggestion" ref={node => { this.node = node; }} className={"searchSuggestion popup"+" "+(this.state.searchList ? 'show' : 'hide')}>
+									<ul className="list-unstyled p-2 mb-0">
+							        	{searchInput.map((searchInput, i) => <li onClick={this.handleSuggestClick} data-value={searchInput.project_name} className={"textEllipsis suggestList text-capitalize t-capital" +" "+(cursor === i ? 'active' : null)} key={searchInput.id}>
+					        				<span>{searchInput.project_name}</span>
+						        		</li>)}
+							    	</ul>
+						      	</div>
+							</span>
+						</div>
+					}
+				</Aux>	
+
+
 		);
 	};
 };	

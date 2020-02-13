@@ -3,6 +3,7 @@ import {getSearchData} from "../../../dataParser/getHomeData.js";
 import  { Redirect } from 'react-router-dom';
 import { withRouter } from "react-router";
 import {priceConverter} from "../../../common/priceConverter.js";
+import Aux from "../../../utils/Aux/aux.js";
 
 class HomeSearch extends Component {
 	constructor(props){
@@ -18,7 +19,19 @@ class HomeSearch extends Component {
     	this.handleChange = this.handleChange.bind(this);
     	this.handleKeyDown = this.handleKeyDown.bind(this);
     	this.handleSearch = this.handleSearch.bind(this);
+    	window.addEventListener("resize", this.update);
 	}
+
+	componentDidMount() {
+        this.update();
+
+      }
+    update = () => {
+        this.setState({
+          screenWidth: window.innerWidth
+        });
+    };
+
 	handleChange = async event => {
 		this.setState({ inputSearch: event.target.value });
 	    // this.setState({ searchInput: event.target.value });
@@ -51,14 +64,17 @@ class HomeSearch extends Component {
 	}
 
 	handlePopUp = () => {
+	    console.log("this.state.popupVisible");
+	    console.log(this.state.popupVisible);
+	    console.log(this.node);
 	    if (!this.state.popupVisible) {
 	      // attach/remove event handler
 	      document.addEventListener('click', this.handleOutsideClick, false);
 	    } else {
 		      document.removeEventListener('click', this.handleOutsideClick, false);
 		      this.setState({
-				    		searchList: false,
-				    	})
+			    		searchList: false,
+			    	})
 	    }
 	    this.setState(prevState => ({
 	       popupVisible: !prevState.popupVisible,
@@ -67,10 +83,11 @@ class HomeSearch extends Component {
   	}
 
   	handleOutsideClick=(e)=> {
+  		console.log(this.node);
 	    // ignore clicks on the component itself
-	    if (this.node.contains(e.target)) {
-	      return;
-	    }
+	    // if (this.node) {
+	    //   return;
+	    // }
 	    
 	    this.handlePopUp();
 	}
@@ -137,36 +154,79 @@ class HomeSearch extends Component {
   	}
 
 	render(){
-			const { cursor,inputSearch,autoInputValue } = this.state
+			const { cursor,inputSearch,autoInputValue,screenWidth} = this.state
 		return(
-			<div className="searchContainer">
-				<h2 className="searchContainerTitle">Your destination for the perfect home</h2>
-				<div className="d-flex justify-content-center">
-					<div className="input-group col-lg-6 searchWrap p-0">
-						<input className="form-control prop_name" type="text" 
-							onChange={this.handleChange} 
-							onKeyDown={ this.handleKeyDown } 
-							placeholder="Search by Project Name, City or Area Keywords" 
-							aria-label="Recipient's username" aria-describedby="basic-addon2"
-							value = {autoInputValue} />
-						<input className="form-control name_hide" type="hidden" />
-						<div className="input-group-append">
-							<button className="input-group btn text-white" onClick={this.handleClick}>search</button>
+			<Aux>
+				{screenWidth > 991 ? 
+					<div className="searchContainer">
+						<h2 className="searchContainerTitle">Your destination for the perfect home</h2>
+						<div className="d-flex justify-content-center">
+							<div className="input-group col-lg-6 col-md-6 searchWrap p-0" ref={node => { this.node = node; }}>
+								<input className="form-control prop_name" type="text" 
+									onChange={this.handleChange}
+									onClick={this.handlePopUp} 
+									onKeyDown={ this.handleKeyDown } 
+									placeholder="Search by Project Name, City or Area Keywords" 
+									aria-label="Recipient's username" aria-describedby="basic-addon2"
+									value = {autoInputValue} 
+									
+								/>
+								<input className="form-control name_hide" type="hidden" />
+								<div className="input-group-append">
+									<button className="input-group btn text-white" onClick={this.handleClick}>search</button>
+								</div>
+								<span>
+									<div id="searchsuggestion" ref={node => { this.node = node; }} className={"searchSuggestion popup"+" "+(this.state.searchList ? 'show' : 'hide')}>
+										<ul className="list-unstyled p-2 mb-0">
+								        	{ this.state.searchInput.map((searchInput, i) => <li onClick={this.handleSuggestClick} data-value={searchInput.project_name} className={"textEllipsis suggestList text-capitalize t-capital" +" "+(cursor === i ? 'active' : null)} key={searchInput.id}>
+								        		<div className="row">
+								        			<div className="col-lg-9 col-md-9 col-sm-9 col-9">
+								        				<span>{searchInput.project_name}</span>
+								        			</div>
+								        			<div className="bedConfig">
+										        		<span className="mr-3">{searchInput.bed_config}BHK</span>
+								        			</div>
+								        			<div className="pricePoject">
+										        		<span className="text-danger">&#8377; {priceConverter(searchInput.price)}</span>
+								        			</div>
+								        		</div>
+							        		</li>)}
+								    	</ul>
+							      	</div>
+								</span>
+							</div>
 						</div>
-						<span>
-							<div id="searchsuggestion" ref={node => { this.node = node; }} className={"searchSuggestion popup"+" "+(this.state.searchList ? 'show' : 'hide')}>
-								<ul className="list-unstyled p-2 mb-0">
-						        	{ this.state.searchInput.map((searchInput, i) => <li onClick={this.handleSuggestClick} data-value={searchInput.project_name} className={"textEllipsis suggestList text-capitalize t-capital" +" "+(cursor === i ? 'active' : null)} key={searchInput.id}>
-						        		<span>{searchInput.project_name}</span>
-						        		<span className="float-right font-weight-bold text-danger">{priceConverter(searchInput.price)}</span>
-						        		<span className="float-right font-weight-bold mr-3">{searchInput.bed_config}BHK</span>
-					        		</li>)}
-						    	</ul>
-					      	</div>
-						</span>
 					</div>
-				</div>
-			</div>
+					:
+					<div className="searchContainer">
+						<h2 className="searchContainerTitle">Your destination for the perfect home</h2>
+						<div className="d-flex justify-content-center">
+							<div className="input-group col-sm-11 col-11 searchWrap p-0">
+								<input className="form-control prop_name" type="text" 
+									onChange={this.handleChange} 
+									onClick={this.handlePopUp}
+									onKeyDown={ this.handleKeyDown } 
+									placeholder="Search by Project Name, City or Area Keywords" 
+									aria-label="Recipient's username" aria-describedby="basic-addon2"
+									value = {autoInputValue} />
+								<input className="form-control name_hide" type="hidden" />
+								<div className="input-group-append">
+									<button className="input-group btn text-white" onClick={this.handleClick}>search</button>
+								</div>
+								<span>
+									<div id="searchsuggestion" ref={node => { this.node = node; }} className={"searchSuggestion popup"+" "+(this.state.searchList ? 'show' : 'hide')}>
+										<ul className="list-unstyled p-2 mb-0">
+								        	{ this.state.searchInput.map((searchInput, i) => <li onClick={this.handleSuggestClick} data-value={searchInput.project_name} className={"textEllipsis suggestList text-capitalize t-capital" +" "+(cursor === i ? 'active' : null)} key={searchInput.id}>
+								        		<span>{searchInput.project_name}</span>
+							        		</li>)}
+								    	</ul>
+							      	</div>
+								</span>
+							</div>
+						</div>
+					</div>
+				}	
+			</Aux>		
 		);
 	};
 };	

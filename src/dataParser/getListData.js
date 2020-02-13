@@ -1,8 +1,8 @@
 import {get, post} from "../utils/Methods.js"
 
 export const getListData = async (value) => {
-	// console.log("the in the parser value");
-	// console.log(value);
+	console.log("the in the parser value");
+	console.log(value);
 	if(value.size == undefined && value.size == null){
 		value.size = 10;
 	}

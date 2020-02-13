@@ -28,7 +28,7 @@ class List extends Component {
 
         var listData = {};
         listData.query = procName;
-        listData.size = 4;
+        listData.size = 8;
         listData.pageId = 1;
         listData.filters = [];
 
@@ -43,7 +43,7 @@ class List extends Component {
 		        this.setState({showLoader : false})
         		window.scrollTo(0, 0);
         	}
-        },1000)
+        },500)
     }
 
     handleSearchData = (data) =>{
@@ -58,7 +58,7 @@ class List extends Component {
 		        this.setState({showLoader : false})
         		window.scrollTo(0, 0);
         	}
-        },1000)
+        },500)
 	}
 
 

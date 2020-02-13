@@ -14,7 +14,9 @@ class Filter extends Component {
       		bhk : [],
       		from : 0,
       		to : 0,
-      		active : false
+      		active : false,
+      		activeClear : true,
+      		activeApply : true
     	};
     	window.addEventListener("resize", this.update);
 	}
@@ -31,6 +33,7 @@ class Filter extends Component {
 
     handleLangChange = (event) => {
     	console.log("in the hanldle===============");
+    	this.setState({activeApply : false})
     	var arrBhk = [];
     	let filters = [];
         if(event.target.className.includes("filter_bhk")){
@@ -97,6 +100,7 @@ class Filter extends Component {
      //    filterData = {"bed_config" :this.state.bhk,"price":[{"from":this.state.from,"to":this.state.to}]};
     		
     	// }
+    	this.setState({activeClear : false});
     	this.props.changeFilter();
         console.log("=== state of the filter ====",filterData);
         this.props.filterData(filterData);  
@@ -109,6 +113,10 @@ class Filter extends Component {
 	    this.setState({active : null})
 	    this.option0.value =0;
 	    this.option1.value =0;
+    	
+    	this.setState({activeClear : true});
+    	this.setState({activeApply : true});
+
     	this.props.changeFilter();
         this.props.filterData(filterData);
 
@@ -136,9 +144,23 @@ class Filter extends Component {
 
 	render(){
 		const isDesktop = this.state.screenWidth;
-		const {active} = this.state;
+		const {active,activeClear,activeApply} = this.state;
 		// console.log("this.props.changeFilter");
 		// console.log(this.props.changeFilter);
+		let optionVal = []
+
+		for(var num = 1000000; num<= 50000000; num = num + 1000000){
+      		if (num < 10000000){
+				var digit = num/100000+" Lac";
+      			// console.log(digit);
+        		optionVal.push({digit,num});
+        	}else if(num >= 10000000){
+        		 var digit = num/10000000+" Cr";
+        		optionVal.push({digit,num});
+        	}
+      	}
+      	// console.log(optionVal);
+		
 		return(
 			<Aux>	
 				{isDesktop > 991 ?
@@ -150,8 +172,8 @@ class Filter extends Component {
             				<FontAwesomeIcon icon={faTimesCircle} className="text-success" />
         				</span>
 			          	<span className="filter_title">Filter</span>
-			          	<span className="apply_filter" onClick = {this.applyFilter}>Apply</span>
-			          	<span className="apply_filter mr-2" onClick = {this.clearFilter}>Clear</span>
+			          	<button className="apply_filter btn" disabled={activeApply ? 'disabled' : ''} onClick = {this.applyFilter}>Apply</button>
+			          	<button className="apply_filter btn mr-2" disabled={activeClear ? 'disabled' : ''} onClick = {this.clearFilter}>Clear</button>
 			        </div>
 			          	<hr/>
 				        <div className="bhk-count col-12">
@@ -173,6 +195,10 @@ class Filter extends Component {
 				              	style={{background: this.myColor(3)}} onClick={(e) => {this.toggle(3);this.handleLangChange(e);}} 
 				              	value="4" ref={(ref) => this.li = ref}
 				              >4BHK</li>
+				              <li className="card filter_bhk p-2 m-2 col-sm-3 col-3" 
+				              	style={{background: this.myColor(4)}} onClick={(e) => {this.toggle(4);this.handleLangChange(e);}} 
+				              	value="5" ref={(ref) => this.li = ref}
+				              >5BHK</li>
 				            </ul>
 				        </div>
 				        <hr/><div className="mb-2 pl-3">Price Range</div>
@@ -181,20 +207,17 @@ class Filter extends Component {
 				          	onChange={this.handleLangChange} ref={(ref) => this.option0 = ref}
 				          >
 				            <option  value="0">Min</option>
-				            <option value="1000000">10 Lakh</option>
-				            <option value="1500000">15 Lakh</option>
-				            <option value="2000000">20 Lakh</option>
-				            <option value="2500000">25 Lakh</option>
+				            {optionVal.map(digit=>
+				            	<option value={digit.num} key={digit.digit}>{digit.digit}</option>
+				            )}
 				          </select>
 				          <select defaultValue={'DEFAULT'} className="custom-select to_price col-sm-5 ml-2 col-5" 
-				          	onChange={this.handleLangChange} ref={(ref) => this.option1 = ref}
+				          	onChange={this.handleLangChange}  ref={(ref) => this.option1 = ref}
 				          >
 				            <option  value="0" >Max</option>
-				            <option value="3000000">30 Lakh</option>
-				            <option value="5000000">50 Lakh</option>
-				            <option value="7000000">70 Lakh</option>
-				            <option value="9000000">90 Lakh</option>
-				            <option value="10000000">1 Cr</option>
+				            {optionVal.map(digit=>
+				            	<option value={digit.num} key={digit.digit}>{digit.digit}</option>
+				            )}
 				          </select>
 				        </div>
 			        </div>
@@ -206,8 +229,8 @@ class Filter extends Component {
             				<FontAwesomeIcon icon={faTimesCircle} className="text-success" />
         				</span>
 			          	<span className="filter_title">Filter</span>
-			          	<span className="apply_filter" onClick = {this.applyFilter}>Apply</span>
-			          	<span className="apply_filter mr-2" onClick = {this.clearFilter}>Clear</span>
+			          	<button className="apply_filter btn" disabled={activeApply ? 'disabled' : ''} onClick = {this.applyFilter}>Apply</button>
+			          	<button className="apply_filter btn mr-2" disabled={activeClear ? 'disabled' : ''} onClick = {this.clearFilter}>Clear</button>
 			          	<hr/>
 				        <div className="bhk-count col-12">
 			          		<span>BHK</span>
@@ -228,25 +251,29 @@ class Filter extends Component {
 				              	style={{background: this.myColor(3)}} onClick={(e) => {this.toggle(3);this.handleLangChange(e);}} 
 				              	value="4" ref={(ref) => this.li = ref}
 				              >4BHK</li>
+				              <li className="card filter_bhk p-2 m-2 col-sm-3 col-3" 
+				              	style={{background: this.myColor(4)}} onClick={(e) => {this.toggle(4);this.handleLangChange(e);}} 
+				              	value="5" ref={(ref) => this.li = ref}
+				              >5BHK</li>
 				            </ul>
 				        </div>
 				        <hr/><div className="mb-2 pl-3">Price Range</div>
 				        <div className="Price-range mb-2">
-				          <select defaultValue={'DEFAULT'} className="custom-select col-sm-5 ml-2 col-5" 
+				          <select defaultValue={'DEFAULT'} className="custom-select from_price col-sm-5 ml-2 col-5"
 				          	onChange={this.handleLangChange} ref={(ref) => this.option0 = ref}
 				          >
-				            <option  value="DEFAULT">Min</option>
-				            <option value="1">One</option>
-				            <option value="2">Two</option>
-				            <option value="3">Three</option>
+				            <option  value="0">Min</option>
+				            {optionVal.map(digit=>
+				            	<option value={digit.num} key={digit.digit}>{digit.digit}</option>
+				            )}
 				          </select>
-				          <select defaultValue={'DEFAULT'} className="custom-select col-sm-5 ml-2 col-5" 
-				          	onChange={this.handleLangChange} ref={(ref) => this.option1 = ref}
+				          <select defaultValue={'DEFAULT'} className="custom-select to_price col-sm-5 ml-2 col-5" 
+				          	onChange={this.handleLangChange}  ref={(ref) => this.option1 = ref}
 				          >
-				            <option  value="DEFAULT" >Max</option>
-				            <option value="1">One</option>
-				            <option value="2">Two</option>
-				            <option value="3">Three</option>
+				            <option  value="0" >Max</option>
+				            {optionVal.map(digit=>
+				            	<option value={digit.num} key={digit.digit}>{digit.digit}</option>
+				            )}
 				          </select>
 				        </div>
 			        </div>
