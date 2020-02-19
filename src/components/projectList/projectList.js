@@ -189,7 +189,7 @@ class ListingBody extends Component {
 														<span className="pr-2">
 								            				<FontAwesomeIcon icon={faCube} className="text-success" />
 							            				</span>	
-														{listVal.property_area}sq. ft.</span>
+														{listVal.property_area} sq. ft.</span>
 													</div>
 												</div>
 												<div className="mt-1 media_menu">

@@ -3,7 +3,7 @@ import React, {Component} from "react";
 import ShowMoreText from 'react-show-more-text';
 import Lightbox from 'react-image-lightbox';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {faSpa, faBiking,faHandHoldingUsd, faTableTennis, faUtensils, faGopuram, faBuilding, faTty, faTree, faHome, faRoad, faFootballBall, faDumbbell, faShieldAlt, faSwimmer, faBatteryQuarter, faFan, faTools, faParking, faWifi, faWater, faBurn, faBookReader, faTheaterMasks, faWrench, faFireExtinguisher, faStore, faSkating, faGolfBall} from "@fortawesome/free-solid-svg-icons";
+import {faSpa, faBan, faBiking,faHandHoldingUsd, faTableTennis, faUtensils, faGopuram, faBuilding, faTty, faTree, faHome, faRoad, faFootballBall, faDumbbell, faShieldAlt, faSwimmer, faBatteryQuarter, faFan, faTools, faParking, faWifi, faWater, faBurn, faBookReader, faTheaterMasks, faWrench, faFireExtinguisher, faStore, faSkating, faGolfBall} from "@fortawesome/free-solid-svg-icons";
 import  "../../assets/css/main.css";
 import PropertyImg from "../../assets/images/Runwal-mobi.jpg";
 import Floor_img from "../../assets/images/floorplan.jpg"
@@ -358,9 +358,9 @@ class ProductBody extends Component {
 
 				        		:
 
-				        		<div className="col-md-4 col-6">
+				        		<div className="col-md-3 col-6">
 						          <ul className="list-unstyled text-center">
-						            <li><span><FontAwesomeIcon icon={faHome} className="text-danger animity_icon" /></span></li>
+						            <li><span><FontAwesomeIcon icon={faBan} className="text-danger animity_icon" /></span></li>
 						            <li> <span className="animity_name">Amenities are not reveled yet.</span></li>
 						          </ul>
 						        </div>
