@@ -180,7 +180,7 @@ class HomeSearch extends Component {
 										<ul className="list-unstyled p-2 mb-0">
 								        	{ this.state.searchInput.map((searchInput, i) => <li onClick={this.handleSuggestClick} data-value={searchInput.project_name} className={"textEllipsis suggestList text-capitalize t-capital" +" "+(cursor === i ? 'activeList' : null)} key={searchInput.id}>
 								        		<span>{searchInput.project_name}</span>
-							        			<span className="float-right">{searchInput.bed_config}BHK</span>
+							        			<span className="float-right">{searchInput.bed_config ? (searchInput.bed_config)+' BHK' : ''}</span>
 							        		</li>)}
 								    	</ul>
 							      	</div>
