@@ -11,7 +11,7 @@ class Filter extends Component {
 		this.state = {
       		screenWidth: 0 ,
       		filters : [],
-      		bhk : [],
+      		bhk : null,
       		from : 0,
       		to : 0,
       		active : false,
@@ -34,13 +34,13 @@ class Filter extends Component {
     handleLangChange = (event) => {
     	// console.log("in the hanldle===============");
     	this.setState({activeApply : false})
-    	var arrBhk = [];
+    	var arrBhk = "";
     	let filters = [];
         if(event.target.className.includes("filter_bhk")){
         	// console.log("attrrrr",event.target.className)
         	var bhk = parseInt(event.target.getAttribute('value'));
-        	arrBhk.push(bhk);
-        	this.setState({bhk: arrBhk});
+        	// arrBhk.push(bhk);
+			this.setState({bhk: bhk});
         }else{
         	if(event.target.className.includes("from_price")){
         	// console.log("priceeeee",event.target.value)
@@ -86,13 +86,13 @@ class Filter extends Component {
     applyFilter= ()=>{
 
     	let filterData = {};
-		if(this.state.bhk.length>0 && this.state.from >0 && this.state.to >0 ){
+		if(this.state.bhk != null && this.state.from >0 && this.state.to >0 ){
         filterData = {"bed_config" :this.state.bhk,"price":[{"from":this.state.from,"to":this.state.to}]};
 
     	}else if(this.state.from >0 && this.state.to >0 ){
         filterData = {"price":[{"from":this.state.from,"to":this.state.to}]};
 
-    	}else if(this.state.bhk.length>0){
+    	}else if(this.state.bhk != null){
         	filterData = {"bed_config" :this.state.bhk};
 
     	}
