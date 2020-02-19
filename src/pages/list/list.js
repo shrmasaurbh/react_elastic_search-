@@ -34,8 +34,8 @@ class List extends Component {
 
         var resData = {};
         resData = await getListData(listData);
-        // console.log("========================================");
-        // console.log(resData);
+        console.log("========================================");
+        console.log(resData);
         setTimeout(()=>{
         	if(resData.meta.count >= 0){
         		

@@ -9,6 +9,7 @@ import PropertyImg from "../../assets/images/Runwal-mobi.jpg";
 import Floor_img from "../../assets/images/floorplan.jpg"
 import map_img from "../../assets/images/mapImage.jpg"
 import {priceConverter} from "../../common/priceConverter.js";
+import {Tabs, Tab} from 'react-bootstrap';
 
 const images = [
 	PropertyImg,
@@ -25,12 +26,34 @@ class ProductBody extends Component {
 	      isOpen: false,
 	      isImageOpen:false
 	    };
+		// const [key, setKey] = useState('home');
 	}
+
 
 	render(){
 		 const {imagePopup, photoIndex, isOpen, isImageOpen } = this.state;
-		 const procData = this.props.procData;
-		 // console.log(procData.description);
+		 var mainData = this.props.procData;
+		 var procData = mainData.data;
+		 // var d = Object.entries(  procData);
+		 console.log(procData.config);
+		 var config = [
+				      {
+				        "bed_config" : 3,
+				        "room_config" : "3 BHK",
+				        "price" : 87852600,
+				        "property_area" : "1464.21",
+				        "rateperfeet" : 60000
+				      },
+				      {
+				        "bed_config" : 4,
+				        "room_config" : "4 BHK",
+				        "price" : 187485600,
+				        "property_area" : "3124.76",
+				        "rateperfeet" : 60000
+				      }
+				    ]
+		 // procData.config.forEach(function (item){
+		 // });
 		 
 		const arrIcon = {"intercom facility":faTty, "lift(s)":faBuilding, "lift":faBuilding, "power backup":faBatteryQuarter, "feng shui / vaastu compliant":faGopuram, "security / fire alarm":faShieldAlt, "centrally air conditioned":faFan, "private garden / terrace":faTree, "park": faTree, "swimming pool":faSwimmer, "maintenance staff":faTools, "visitor parking":faParking, "internet/wi-fi connectivity":faWifi, "security personnel":faShieldAlt, "club house / community center":faHome, "fitness centre / gym":faDumbbell, "water softening plant":faTree, "water storage":faWater, "piped-gas":faBurn, "restaurant": faUtensils, "badminton court":faTableTennis, "cricket pitch":faFootballBall, "basketball court":faFootballBall, "squash court":faFootballBall, "atm":faHandHoldingUsd, "indoor game room":faTableTennis, "rainwater harvesting":faWater, "landscaped garden":faTree, "cycling & jogging track":faBiking, "children play area":faTableTennis, "gym":faDumbbell, "library":faBookReader, "spa":faSpa, "tennis court":faTableTennis, "amphitheatre":faTheaterMasks, "rain water harvesting" :faWater, "sports area":faTableTennis, "24x7 security":faShieldAlt, "service/goods lift":faBuilding, "sewage treatment plant":faWrench, "internal roads":faRoad, "community hall":faBuilding, "aerobics room": faDumbbell, "high-tech alarm system":faShieldAlt, "fire fighting systems":faFireExtinguisher, "utility shops":faStore, "security":faShieldAlt, "skating rink":faSkating, "golf course":faGolfBall};
 		
@@ -68,121 +91,129 @@ class ProductBody extends Component {
 						          <h4 className="t-capital">{procData.title}</h4>
 						          <small className="t-capital">{procData.location}</small>
 						        </div>
-					          <ul className="list-unstyled prop_align mt-2">
-					            <li>
-					            	<div className="row">
-						            		<div className="col-sm-4 col-4">
-						            			<div className="p_title">Bedrooms</div>
-					            				{procData.bed_config ? 
-						            				<div className="p_value">{procData.bed_config}</div>
-						            				:
-						            				<div className="p_value">-</div>
-							            		}
-						            		</div>
+						        <Tabs id="controlled-tab-example">
+						        	{procData.config.map((con,index) => 
+								      <Tab eventKey={con.price} key={index} title={(con.bed_config)+" BHK"}>
+								        <ul className="list-unstyled prop_align mt-2">
+								            <li>
+								            	<div className="row">
+									            		<div className="col-sm-4 col-4">
+									            			<div className="p_title">Bedrooms</div>
+								            				{con.bed_config ? 
+									            				<div className="p_value">{con.bed_config}</div>
+									            				:
+									            				<div className="p_value">-</div>
+										            		}
+									            		</div>
 
-						            		<div className="col-sm-4 col-4">
-						            			<div className="p_title">Bathrooms</div>
-					            				{procData.bath_no ? 
-						            				<div className="p_value">{procData.bath_no}</div>
-						            				:
-						            				<div className="p_value">-</div>
-								            	}
-						            		</div>
-						            	
-						            		<div className="col-sm-4 col-4">
-						            			<div className="p_title">Balcony</div>
-						            			{procData.balcony ? 
-						            				<div className="p_value">{procData.balcony}</div>
-						            				:
-						            				<div className="p_value">-</div>
-								            	}	
-						            		</div>
-					            	</div>
-				            	</li>
-				            	<hr />
-				            	<li>
-					            	<div className="row">
-					            			<div className="col-sm-4 col-4">
-					            				<div className="p_title">Rate per Sq.ft</div>
-					            				{procData.rateperfeet ? 
-					            					<div className="p_value">&#8377; {procData.rateperfeet}</div>
-					            					:
-					            					<div className="p_value">-</div>
-							            		}
-					            			</div>
-					            		
-						            		<div className="col-sm-4 col-4">
-						            			<div className="p_title">Carpet area</div>
-					            				{procData.property_area ? 
-						            				<div className="p_value">{procData.property_area} sq.ft</div>
-						            				:
-						            				<div className="p_value">-</div>
-								            	}
-						            		</div>
-						            		<div className="col-sm-4 col-4">
-						            			<div className="p_title">Price</div>
-						            			{procData.price ? 
-						            				<div className="p_value">&#8377; {priceConverter(procData.price)}</div>
-						            				:
-						            				<div className="p_value">-</div>
-								            	}
-						            		</div>
-					            	</div>
-				            	</li>
-				            	<hr />
-				            	<li>
-					            	<div className="row">
-						            		<div className="col-sm-4 col-4">
-						            			<div className="p_title">Status</div>
-					            				{procData.sale_type ? 
-						            				<div className="p_value text-capitalize">{procData.sale_type}</div>
-					            					:
-						            				<div className="p_value">-</div>
-								            	}	
-						            		</div>
-						            		<div className="col-sm-4 col-4">
-						            			<div className="p_title">Car parking</div>
-					            				{procData.parking ? 
-						            				<div className="p_value text-capitalize">{procData.parking}</div>
-						            				:
-						            				<div className="p_value">-</div>
-								            	}
-						            		</div>
+									            		<div className="col-sm-4 col-4">
+									            			<div className="p_title">Bathrooms</div>
+								            				{con.bath_no ? 
+									            				<div className="p_value">{con.bath_no}</div>
+									            				:
+									            				<div className="p_value">-</div>
+											            	}
+									            		</div>
+									            	
+									            		<div className="col-sm-4 col-4">
+									            			<div className="p_title">Balcony</div>
+									            			{con.balcony ? 
+									            				<div className="p_value">{con.balcony}</div>
+									            				:
+									            				<div className="p_value">-</div>
+											            	}	
+									            		</div>
+								            	</div>
+							            	</li>
+							            	<hr />
+							            	<li>
+								            	<div className="row">
+								            			<div className="col-sm-4 col-4">
+								            				<div className="p_title">Rate per Sq.ft</div>
+								            				{con.rateperfeet ? 
+								            					<div className="p_value">&#8377; {priceConverter(con.rateperfeet)}</div>
+								            					:
+								            					<div className="p_value">-</div>
+										            		}
+								            			</div>
+								            		
+									            		<div className="col-sm-4 col-4">
+									            			<div className="p_title">Carpet area</div>
+								            				{con.property_area ? 
+									            				<div className="p_value">{con.property_area} sq.ft</div>
+									            				:
+									            				<div className="p_value">-</div>
+											            	}
+									            		</div>
+									            		<div className="col-sm-4 col-4">
+									            			<div className="p_title">Price</div>
+									            			{con.price ? 
+									            				<div className="p_value">&#8377; {priceConverter(con.price)}</div>
+									            				:
+									            				<div className="p_value">-</div>
+											            	}
+									            		</div>
+								            	</div>
+							            	</li>
+							            	<hr />
+							            	<li>
+								            	<div className="row">
+								            		<div className="col-sm-4 col-4">
+								            			<div className="p_title">Status</div>
+							            				{procData.sale_type ? 
+								            				<div className="p_value text-capitalize">{procData.sale_type}</div>
+							            					:
+								            				<div className="p_value">-</div>
+										            	}	
+								            		</div>
+								            		<div className="col-sm-4 col-4">
+								            			<div className="p_title">Car parking</div>
+							            				{procData.parking ? 
+								            				<div className="p_value text-capitalize">{procData.parking}</div>
+								            				:
+								            				<div className="p_value">-</div>
+										            	}
+								            		</div>
 
-						            		<div className="col-sm-4 col-4">
-						            			<div className="p_title">Floor</div>
-						            			{procData.floors ?
-						            				<div className="p_value text-capitalize">{procData.floors}</div>
-						            				:
-						            				<div className="p_value">-</div>
-								            	}	
+								            		<div className="col-sm-4 col-4">
+								            			<div className="p_title">Floor</div>
+								            			{procData.floors ?
+								            				<div className="p_value text-capitalize">{procData.floors}</div>
+								            				:
+								            				<div className="p_value">-</div>
+										            	}	
+								            		</div>
+								            	</div>
+							            	</li>
+							            	<hr />
+								        </ul>
+								      </Tab>
+							      )}
+							    </Tabs>
+							    <ul className="list-unstyled mb-0">
+							    	<li>
+						            	<div className="row">
+						            		<div className="col-sm-6">
+						            			<div className="thumb_img">
+						            				<img src={Floor_img} alt="floor-plan" onClick={() => this.setState({ isImageOpen: true, imagePopup: Floor_img })}/>
+						            				<span className="tag_name">Floor Plan</span>
+						            				{isImageOpen && (
+											          <Lightbox
+											            mainSrc={imagePopup}
+											            onCloseRequest={() => this.setState({ isImageOpen: false })}
+											          />
+											        )}
+						            			</div>
 						            		</div>
-					            	</div>
-				            	</li>
-				            	<hr />
-				            	<li>
-					            	<div className="row">
-					            		<div className="col-sm-6">
-					            			<div className="thumb_img">
-					            				<img src={Floor_img} alt="floor-plan" onClick={() => this.setState({ isImageOpen: true, imagePopup: Floor_img })}/>
-					            				<span className="tag_name">Floor Plan</span>
-					            				{isImageOpen && (
-										          <Lightbox
-										            mainSrc={imagePopup}
-										            onCloseRequest={() => this.setState({ isImageOpen: false })}
-										          />
-										        )}
-					            			</div>
-					            		</div>
-					            		<div className="col-sm-6">
-					            			<div className="thumb_img">
-					            				<img src={map_img} alt="floor-plan"/>
-					            				<span className="tag_name">See Location</span>
-					            			</div>
-					            		</div>
-					            	</div>
-				            	</li>
-					          </ul>
+						            		<div className="col-sm-6">
+						            			<div className="thumb_img">
+						            				<img src={map_img} alt="floor-plan"/>
+						            				<span className="tag_name">See Location</span>
+						            			</div>
+						            		</div>
+						            	</div>
+					            	</li>
+							    </ul>
 					        </div>
 					    </div>
 
@@ -313,7 +344,7 @@ class ProductBody extends Component {
 					        <div className="col-md-12 mb-4">
 					          <h5 className="project_specs p-2 pl-3">Amenities</h5>
 					        </div>
-					        {procData.amenities != undefined ? 
+					        {procData.amenities.length ? 
 					        	procData.amenities.map(ameni => 
 
 							        <div className="col-md-2 col-6" key={ameni}>
@@ -327,7 +358,7 @@ class ProductBody extends Component {
 
 				        		:
 
-				        		<div className="col-md-2 col-6">
+				        		<div className="col-md-4 col-6">
 						          <ul className="list-unstyled text-center">
 						            <li><span><FontAwesomeIcon icon={faHome} className="text-danger animity_icon" /></span></li>
 						            <li> <span className="animity_name">Amenities are not reveled yet.</span></li>

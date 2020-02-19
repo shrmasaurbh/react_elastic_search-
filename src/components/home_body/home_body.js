@@ -179,7 +179,7 @@ class HomeBody extends Component {
 												<div>
 													<ul className="list-unstyled d-flex">
 														<li className="mr-2 text-success"><span>&#8377; {priceConverter(trend.price)}</span></li>
-														<li className="mr-1"><span>{trend.bed_config}BHK</span></li>
+														<li className="mr-1"><span>{trend.bed_config} BHK</span></li>
 													</ul>
 												</div>
 											</div>
@@ -302,7 +302,7 @@ class HomeBody extends Component {
 														</Link>
 							            			</li>
 								            		<li className="p-1 t-capital"><h5 className="textEllipsis featureProcName">{feature.project_name}</h5></li>
-								            		<li className="p-1 text-info">{feature.bed_config}BHK</li>
+								            		<li className="p-1 text-info">{feature.bed_config} BHK</li>
 								            		<li className="p-1">&#8377; {priceConverter(feature.price)}</li>
 								            	</ul>
 								            </div>

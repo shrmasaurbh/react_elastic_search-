@@ -644,7 +644,7 @@
     text-transform: capitalize;
     cursor: pointer;
 }
-.suggestList:hover, .active{
+.suggestList:hover, .activeList{
     background-color: #f3f5f7!important;
 }
 

@@ -162,7 +162,7 @@ class HomeSearch extends Component {
 						<h2 className="searchContainerTitle">Your destination for the perfect home</h2>
 						<div className="d-flex justify-content-center">
 							<div className="input-group col-lg-6 col-md-6 searchWrap p-0" ref={node => { this.node = node; }}>
-								<input className="form-control prop_name" type="text" 
+								<input className="form-control prop_name text-capitalize" type="text" 
 									onChange={this.handleChange}
 									onClick={this.handlePopUp} 
 									onKeyDown={ this.handleKeyDown } 
@@ -178,18 +178,9 @@ class HomeSearch extends Component {
 								<span>
 									<div id="searchsuggestion" ref={node => { this.node = node; }} className={"searchSuggestion popup"+" "+(this.state.searchList ? 'show' : 'hide')}>
 										<ul className="list-unstyled p-2 mb-0">
-								        	{ this.state.searchInput.map((searchInput, i) => <li onClick={this.handleSuggestClick} data-value={searchInput.project_name} className={"textEllipsis suggestList text-capitalize t-capital" +" "+(cursor === i ? 'active' : null)} key={searchInput.id}>
-								        		<div className="row">
-								        			<div className="col-lg-9 col-md-9 col-sm-9 col-9">
-								        				<span>{searchInput.project_name}</span>
-								        			</div>
-								        			<div className="bedConfig">
-										        		<span className="mr-3">{searchInput.bed_config}BHK</span>
-								        			</div>
-								        			<div className="pricePoject">
-										        		<span className="text-danger">&#8377; {priceConverter(searchInput.price)}</span>
-								        			</div>
-								        		</div>
+								        	{ this.state.searchInput.map((searchInput, i) => <li onClick={this.handleSuggestClick} data-value={searchInput.project_name} className={"textEllipsis suggestList text-capitalize t-capital" +" "+(cursor === i ? 'activeList' : null)} key={searchInput.id}>
+								        		<span>{searchInput.project_name}</span>
+							        			<span className="float-right">{searchInput.bed_config}BHK</span>
 							        		</li>)}
 								    	</ul>
 							      	</div>
@@ -202,7 +193,7 @@ class HomeSearch extends Component {
 						<h2 className="searchContainerTitle">Your destination for the perfect home</h2>
 						<div className="d-flex justify-content-center">
 							<div className="input-group col-sm-11 col-11 searchWrap p-0">
-								<input className="form-control prop_name" type="text" 
+								<input className="form-control prop_name text-capitalize" type="text" 
 									onChange={this.handleChange} 
 									onClick={this.handlePopUp}
 									onKeyDown={ this.handleKeyDown } 
@@ -216,7 +207,7 @@ class HomeSearch extends Component {
 								<span>
 									<div id="searchsuggestion" ref={node => { this.node = node; }} className={"searchSuggestion popup"+" "+(this.state.searchList ? 'show' : 'hide')}>
 										<ul className="list-unstyled p-2 mb-0">
-								        	{ this.state.searchInput.map((searchInput, i) => <li onClick={this.handleSuggestClick} data-value={searchInput.project_name} className={"textEllipsis suggestList text-capitalize t-capital" +" "+(cursor === i ? 'active' : null)} key={searchInput.id}>
+								        	{ this.state.searchInput.map((searchInput, i) => <li onClick={this.handleSuggestClick} data-value={searchInput.project_name} className={"textEllipsis suggestList text-capitalize t-capital" +" "+(cursor === i ? 'activeList' : null)} key={searchInput.id}>
 								        		<span>{searchInput.project_name}</span>
 							        		</li>)}
 								    	</ul>

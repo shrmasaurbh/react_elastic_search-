@@ -29,7 +29,7 @@ class ListingBody extends Component {
 	changeFilterState(event) {
 	    this.setState({filterPopUp: !this.state.filterPopUp})
 	}
-	componentWillReceiveProps(nextProps) {
+	componentDidUpdate(nextProps) {
 	 // console.log('componentWillReceiveProps', nextProps);
 	 	if (this.props !== nextProps) {
 	  	// this.setState({nextProps});
@@ -176,7 +176,7 @@ class ListingBody extends Component {
 														<span className="pr-2">
 								            				<FontAwesomeIcon icon={faTags} className="text-warning" />
 							            				</span>	
-														<span className="pl-1 price_flat ">&#8377; {priceConverter(listVal.price)}</span>
+														<span className="pl-1 price_flat ">From &#8377; {priceConverter(listVal.price)}</span>
 													</div>
 													<div className="col-md-4 col-8 media_menu">
 														<span className="pr-2">

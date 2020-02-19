@@ -276,7 +276,7 @@ class CommonSearch extends Component {
 				<Aux>
 					{ screenWidth > 991 ? 
 						<div className="input-group searchWrap p-0" ref={node => { this.node = node; }}>
-							<input className="form-control prop_name" type="text" 
+							<input className="form-control prop_name text-capitalize" type="text" 
 								onChange={this.handleChange} 
 								onClick={this.handlePopUp}
 								onKeyDown={ this.handleKeyDown } 
@@ -290,18 +290,9 @@ class CommonSearch extends Component {
 							<span>
 								<div id="searchsuggestion" ref={node => { this.node = node; }} className={"searchSuggestion popup"+" "+(this.state.searchList ? 'show' : 'hide')}>
 									<ul className="list-unstyled p-2 mb-0">
-							        	{searchInput.map((searchInput, i) => <li onClick={this.handleSuggestClick} data-value={searchInput.project_name} className={"textEllipsis suggestList text-capitalize t-capital" +" "+(cursor === i ? 'active' : null)} key={searchInput.id}>
-							        		<div className="row">
-							        			<div className="col-lg-9 col-md-9 col-sm-9 col-9">
-							        				<span>{searchInput.project_name}</span>
-							        			</div>
-							        			<div className="bedConfig">
-									        		<span className="mr-3">{searchInput.bed_config}BHK</span>
-							        			</div>
-							        			<div className="pricePoject">
-									        		<span className="text-danger">&#8377; {priceConverter(searchInput.price)}</span>
-							        			</div>
-							        		</div>
+							        	{searchInput.map((searchInput, i) => <li onClick={this.handleSuggestClick} data-value={searchInput.project_name} className={"textEllipsis suggestList text-capitalize t-capital" +" "+(cursor === i ? 'activeList' : null)} key={searchInput.id}>
+					        				<span>{searchInput.project_name}</span>
+							        		<span className="float-right">{searchInput.bed_config}BHK</span>
 						        		</li>)}
 							    	</ul>
 						      	</div>
@@ -309,7 +300,7 @@ class CommonSearch extends Component {
 						</div>
 						:
 						<div className="input-group searchWrap p-0">
-							<input className="form-control prop_name" type="text" 
+							<input className="form-control prop_name text-capitalize" type="text" 
 								onChange={this.handleChange}
 								onClick={this.handlePopUp} 
 								onKeyDown={ this.handleKeyDown } 
@@ -323,7 +314,7 @@ class CommonSearch extends Component {
 							<span>
 								<div id="searchsuggestion" ref={node => { this.node = node; }} className={"searchSuggestion popup"+" "+(this.state.searchList ? 'show' : 'hide')}>
 									<ul className="list-unstyled p-2 mb-0">
-							        	{searchInput.map((searchInput, i) => <li onClick={this.handleSuggestClick} data-value={searchInput.project_name} className={"textEllipsis suggestList text-capitalize t-capital" +" "+(cursor === i ? 'active' : null)} key={searchInput.id}>
+							        	{searchInput.map((searchInput, i) => <li onClick={this.handleSuggestClick} data-value={searchInput.project_name} className={"textEllipsis suggestList text-capitalize t-capital" +" "+(cursor === i ? 'activeList' : null)} key={searchInput.id}>
 					        				<span>{searchInput.project_name}</span>
 						        		</li>)}
 							    	</ul>

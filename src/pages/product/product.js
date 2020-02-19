@@ -24,7 +24,7 @@ class Product extends Component {
         setTimeout(()=>{
         	if(resData.meta.status === 200 && resData.meta.error == false){
         		
-		        this.setState({propertyDetail : resData.data}) ;
+		        this.setState({propertyDetail : resData}) ;
 		        this.setState({showLoader : false})
         		window.scrollTo(0, 0);
         	}
@@ -40,7 +40,9 @@ class Product extends Component {
 			<div>
 				<Loading show={this.state.showLoader} />
 				<Header />
-				<ProductBody  procData ={this.state.propertyDetail} />
+				{this.state.propertyDetail.meta && 
+					<ProductBody  procData ={this.state.propertyDetail} />
+				}	
 				<Footer />
 			</div>
 		);
