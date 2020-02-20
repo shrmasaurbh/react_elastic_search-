@@ -87,7 +87,7 @@ class ProductBody extends Component {
 					        	</div>
 					        </div>
 					        <div className="col-md-7">
-					        	<div className="productTitle mb-4">
+					        	<div className="productTitle mb-2">
 						          <h4 className="t-capital">{procData.title}</h4>
 						          <small className="t-capital">{procData.location}</small>
 						        </div>
