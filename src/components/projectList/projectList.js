@@ -172,13 +172,13 @@ class ListingBody extends Component {
 						            				</Link>
 												</div>
 												<div className="row">
-													<div className="col-md-4 col-4 media_menu">
+													<div className="col-md-4 col-6 media_menu">
 														<span className="pr-2">
 								            				<FontAwesomeIcon icon={faTags} className="text-warning" />
 							            				</span>	
 														<span className="pl-1 price_flat ">From &#8377; {priceConverter(listVal.price)}</span>
 													</div>
-													<div className="col-md-4 col-8 media_menu">
+													<div className="col-md-4 col-6 media_menu">
 														<span className="pr-2">
 								            				<FontAwesomeIcon icon={faBed} className="text-success" />
 							            				</span>	
